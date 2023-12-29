@@ -1,0 +1,12 @@
+.bg-beer {
+    background-color: #f09f27;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #f09f27;
+}
