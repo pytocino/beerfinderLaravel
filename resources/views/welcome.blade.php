@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             @if ($beer->image)
-                                <img src="{{ $beer->image }}" class="card-img-top img-fluid mb-2"
+                                <img src="{{ Storage::url($beer->image) }}" class="card-img-top img-fluid mb-2"
                                     alt="{{ $beer->name }}">
                             @else
                                 <img src="images/beerfinder.svg" class="card-img-top img-fluid mb-2"

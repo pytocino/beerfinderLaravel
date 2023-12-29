@@ -15,7 +15,8 @@
                 <div class="col-6 col-md-4 mb-4">
                     <div class="card">
                         @if ($local->image)
-                            <img src="{{ $local->image }}" class="card-img-top img-fluid" alt="{{ $local->name }}">
+                            <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
+                                alt="{{ $local->name }}">
                         @else
                             <img src="images/beerfinder.svg" class="card-img-top img-fluid p-4"
                                 alt="{{ $local->name }}">
