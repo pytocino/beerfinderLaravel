@@ -1,10 +1,14 @@
 <div class="my-4">
-    <form class="text-white text-center form form-control text-center bg-dark" action="" method="GET">
-        <label for="selectOptionCervezas" class="form-label fw-semibold display-5 my-3">¿QUE CERVEZA TE
+    <form class="text-white text-center form form-control text-center bg-dark" action="{{ route('locals') }}"
+        method="GET">
+        <label for="name" class="form-label fw-semibold display-5 my-3">¿QUE CERVEZA TE
             APETECE?</label>
-        <select class="form-select my-2" id="selectOptionCervezas" name="marcaCerveza" required>
+        <select class="form-select my-2" id="name" name="name" required>
             <option class="text-center" value="" selected>Escoge una</option>
+            @foreach ($beernames as $beername)
+                <option class="text-center" value="{{ $beername->name }}">{{ $beername->name }}</option>
+            @endforeach
         </select>
-        <button type="submit" class="btn btn-success fw-semibold mt-2">ENCUENTRALA</button>
+        <button type="submit" class="btn btn-success fw-semibold my-2">ENCUENTRALA</button>
     </form>
 </div>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id')->constrained('users');
             $table->string('name')->unique();
+            $table->string('type');
             $table->string('description')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();

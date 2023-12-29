@@ -10,9 +10,12 @@ class BeerController extends Controller
 {
     public function index()
     {
-        $beers = Cache::remember('random_beers', now()->addWeek(), function () {
-            return Beer::inRandomOrder()->limit(8)->get();
-        });
-        return view('welcome', compact('beers'));
+        // todas las beers a la vista welcome
+        $beernames = Beer::all();
+        $beers = Beer::inRandomOrder()->take(10)->get();
+
+        return view('welcome')
+            ->with('beernames', $beernames)
+            ->with('beers', $beers);
     }
 }

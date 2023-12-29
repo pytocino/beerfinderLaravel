@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\BeerController;
-//use App\Http\Controllers\LocalBeerController;
-//use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BeerlocalController;
+use App\Http\Controllers\LocalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
+| Here is where you can register web routes for your application.
+| These routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
 */
@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BeerController::class, 'index'])->name('home');
 
-Route::get('/locals', function () {
-    return view('locals');
-})->name('locals');
+//Route::get('/locals', function () {
+//    return view('locals');
+//})->name('locals');
 
-//Route::get('/locals', [LocalBeerController::class, 'getLocalesByName'])->name('locals');
+Route::get('/locals', [LocalController::class, 'getLocalsByName'])->name('locals');
 
 Route::get('/blog', function () {
     return view('blog');
