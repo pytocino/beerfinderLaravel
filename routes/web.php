@@ -33,35 +33,35 @@ Route::get('/blog', function () {
 })->name('blog');
 
 Route::get('/contactUsuarios', function () {
-    return view('contactUsuarios');
+    return view('form');
 })->name('contactUsuarios');
 
 Route::get('/contactLocals', function () {
-    return view('contactLocales');
-})->name('contactLocales');
+    return view('eform');
+})->name('contactEmpresas');
 
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
 Route::get('/aboutBeerfinder', function () {
-    return view('aboutBeerfinder');
+    return view('about');
 })->name('aboutBeerfinder');
 
 Route::get('/cookies', function () {
-    return view('cookiesPolytics');
+    return view('cookies');
 })->name('cookiesPolicy');
 
 Route::get('/privacy', function () {
-    return view('privacyPolicy');
+    return view('privacy');
 })->name('privacyPolicy');
 
 Route::get('/legalAdvice', function () {
-    return view('legalAdvice');
+    return view('advice');
 })->name('legalAdvice');
 
 Route::get('/consumer', function () {
-    return view('consume');
+    return view('responsability');
 })->name('consume');
 
 Route::get('/dashboard', function () {

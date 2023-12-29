@@ -10,13 +10,11 @@
                 @include('partials.finder')
             </div>
         </div>
-        <div class="row mb-2">
+        <div class="row">
             <div class="col-12">
                 <h2 class="text-center">Esta semana te recomendamos</h2>
             </div>
-        </div>
-        <div class="row">
-            @foreach ($beers as $key => $beer)
+            @foreach ($beers as $beer)
                 <div class="col-6 col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
@@ -40,9 +38,7 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
-
     </main>
     @include('partials.footer')
 </body>

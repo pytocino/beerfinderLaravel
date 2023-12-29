@@ -5,25 +5,25 @@
                 <h5 class="text-uppercase mb-4">Nosotros</h5>
                 <ul class="list-unstyled mb-4">
                     <li>
-                        <a href="http://beerfinder.test/aboutBeerfinder">Sobre BEERFINDER</a>
+                        <a href="{{ route('aboutBeerfinder') }}">Sobre BEERFINDER</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/faq">FAQ</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/cookies">Politica de cookies</a>
+                        <a href="{{ route('cookiesPolicy') }}">Politica de cookies</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/privacy">Politica de privacidad</a>
+                        <a href="{{ route('privacyPolicy') }}">Politica de privacidad</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/legalAdvice">Aviso legal</a>
+                        <a href="{{ route('legalAdvice') }}">Aviso legal</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/consumer">Disfruta con responsabilidad</a>
+                        <a href="{{ route('consume') }}">Disfruta con responsabilidad</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/blog">Blog</a>
+                        <a href="{{ route('blog') }}">Blog</a>
                     </li>
                 </ul>
             </div>
@@ -31,16 +31,22 @@
                 <h5 class="text-uppercase mb-4">Asistencia</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="http://beerfinder.test/contactLocals">¿Eres una empresa? Contactanos</a>
+                        <a href="{{ route('contactEmpresas') }}">¿Eres una empresa? Contactanos</a>
                     </li>
                     <li>
-                        <a href="http://beerfinder.test/contactUsuarios">Habla con nosotros</a>
+                        <a href="{{ route('contactUsuarios') }}">Habla con nosotros</a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                 <h5 class="text-uppercase mb-4">Trabaja con nosotros</h5>
                 <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Inicia sesión</a>
+                    </li>
+                    <li>
+                        <a href="#!">Regístrate</a>
+                    </li>
                     <li>
                         <a href="#!">Oportunidades</a>
                     </li>
@@ -65,11 +71,13 @@
             </div>
             <div class="col-lg-6 col-md-12 mb-4">
                 <h5 class="text-uppercase mb-4">Suscribete a nuestra newsletter</h5>
-                <div class="form-outline form-white mb-4">
-                    <label class="form-label" for="form5Example2">Direccion de correo electronico</label>
-                    <input type="email" id="form5Example2" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-outline-white btn-danger">Suscribete</button>
+                <form class="d-flex justify-content-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Correo electrónico"
+                            aria-label="Correo electrónico" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Suscribirse</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -78,3 +86,6 @@
         <h3>Todos los derechos reservados.</h3>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
