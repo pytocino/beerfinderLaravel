@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div class="d-flex justify-content-center align-items-center">
                     <a class="my-4" href="{{ route('home') }}">
-                        @include('partials.appLogo')
+                        @include('components.application-logo')
                     </a>
                 </div>
             </div>
