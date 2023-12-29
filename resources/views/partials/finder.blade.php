@@ -9,6 +9,7 @@
                 <option class="text-center" value="{{ $beername->name }}">{{ $beername->name }}</option>
             @endforeach
         </select>
+        <button type="reset" class="btn btn-danger fw-semibold my-2">Borrar</button>
         <button type="submit" class="btn btn-success fw-semibold my-2">ENCUENTRALA</button>
     </form>
 </div>

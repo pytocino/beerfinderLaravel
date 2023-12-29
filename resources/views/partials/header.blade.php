@@ -1,4 +1,6 @@
-<header class="bg-beer">
+@include('partials.buttonscroll')
+
+<header class="bg-beer sticky-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">

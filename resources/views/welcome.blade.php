@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Esta semana te recomendamos</h2>
+                <h2 class="text-center">Aqui te hacemos algunas sugerencias</h2>
             </div>
             @foreach ($beers as $beer)
                 <div class="col-6 col-md-4 mb-4">
@@ -30,8 +30,8 @@
                             <p class="card-text">{{ $beer->color }}</p>
                             <!--<p class="card-text">{{-- $beer->taste --}}</p>-->
                             <p class="card-text">{{ $beer->country }}</p>
-                            <form class="d-flex justify-content-center" action="" method="GET">
-                                <input type="hidden" name="marcaCerveza" value="{{ $beer->name }}">
+                            <form class="d-flex justify-content-center" action="{{ route('locals') }}" method="GET">
+                                <input type="hidden" name="name" value="{{ $beer->name }}">
                                 <button type="submit" class="btn bg-beer fw-semibold">ENCUENTRALA</button>
                             </form>
                         </div>
