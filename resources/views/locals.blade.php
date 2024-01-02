@@ -11,25 +11,31 @@
             </div>
         </div>
         <div class="row">
-            @foreach ($locals as $local)
-                <div class="col-6 col-md-4 mb-4">
-                    <div class="card">
-                        @if ($local->image)
-                            <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
-                                alt="{{ $local->name }}">
-                        @else
-                            <img src="images/beerfinder.svg" class="card-img-top img-fluid p-4"
-                                alt="{{ $local->name }}">
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $local->name }}</h5>
-                            <p class="card-text">{{ $local->description }}</p>
-                            <p class="card-text">{{ $local->type }}</p>
-                            <a class="btn btn-dark" href="{{ $local->address }}">Como llegar</a>
+            @if (count($locals) === 0)
+                <div class="col-12">
+                    <p class="text-center">No se encontraron resultados</p>
+                </div>
+            @else
+                @foreach ($locals as $local)
+                    <div class="col-6 col-md-4 mb-4">
+                        <div class="card">
+                            @if ($local->image)
+                                <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
+                                    alt="{{ $local->name }}">
+                            @else
+                                <img src="images/beerfinder.svg" class="card-img-top img-fluid p-4"
+                                    alt="{{ $local->name }}">
+                            @endif
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $local->name }}</h5>
+                                <p class="card-text">{{ $local->description }}</p>
+                                <p class="card-text">{{ $local->type }}</p>
+                                <a class="btn btn-dark" href="{{ $local->address }}">Como llegar</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
         </div>
     </main>
     @include('partials.footer')

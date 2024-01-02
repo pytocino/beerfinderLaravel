@@ -65,6 +65,9 @@ Route::get('/consumer', function () {
     return view('responsability');
 })->name('consume');
 
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
