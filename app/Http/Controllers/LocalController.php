@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Local;
-use App\Models\User;
 use App\Models\Beer;
-use App\Models\Beerlocal;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+
 
 class LocalController extends Controller
 {
     public function getLocalsByName()
     {
-        $name = request('name');
-        $locals = Local::join('beerlocals', 'locals.id', '=', 'beerlocals.local_id')
-            ->join('beers', 'beerlocals.beer_id', '=', 'beers.id')
-            ->where('beers.name', $name)
-            ->paginate(10); // Change the number to the desired pagination limit
+        $name = request('name'); // El nombre de la marca de cerveza que estás buscando
+        $beer = Beer::where('name', $name)->first(); // Buscamos la cerveza por el nombre
 
-        return view('locals', compact('locals', 'name'));
+        $locals = Local::select('locals.*')
+            ->join('beerlocals', 'locals.id', '=', 'beerlocals.local_id')
+            ->join('beers', 'beerlocals.beer_id', '=', 'beers.id')
+            ->where('beers.id', $beer->id)
+            ->paginate(2);
+        return view('locals', ['locals' => $locals, 'name' => $name]);
     }
 }
