@@ -17,7 +17,7 @@ class LocalController extends Controller
         $locals = Local::join('beerlocals', 'locals.id', '=', 'beerlocals.local_id')
             ->join('beers', 'beerlocals.beer_id', '=', 'beers.id')
             ->where('beers.name', $name)
-            ->paginate(3); // Change the number to the desired pagination limit
+            ->paginate(10); // Change the number to the desired pagination limit
 
         return view('locals', compact('locals', 'name'));
     }
