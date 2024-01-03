@@ -42,10 +42,10 @@
                 <h5 class="text-uppercase mb-4">Trabaja con nosotros</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#!">Inicia sesión</a>
+                        <a href="{{ route('login') }}">Inicia sesión</a>
                     </li>
                     <li>
-                        <a href="#!">Regístrate</a>
+                        <a href="{{ route('register') }}">Regístrate</a>
                     </li>
                     <li>
                         <a href="#!">Oportunidades</a>

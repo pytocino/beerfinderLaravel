@@ -16,5 +16,11 @@ class UserSeeder extends Seeder
     {
         User::truncate();
         User::factory(100)->create();
+        User::factory(
+            [
+                'email' => env('ADMIN_EMAIL'),
+                'password' => bcrypt(env('ADMIN_PASSWORD'))
+            ]
+        )->create();
     }
 }
