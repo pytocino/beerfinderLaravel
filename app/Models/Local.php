@@ -20,4 +20,9 @@ class Local extends Model
         'city',
         'region'
     ];
+
+    public function beers()
+    {
+        return $this->belongsToMany(Beer::class, 'beerlocals');
+    }
 }

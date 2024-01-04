@@ -17,13 +17,13 @@
                 </div>
             @else
                 @foreach ($locals as $local)
-                    <div class="col-6 col-md-4 mb-4">
+                    <div class="col-12 col-md-6 mb-4">
                         <div class="card">
                             @if ($local->image)
                                 <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
                                     alt="{{ $local->name }}">
                             @else
-                                <img src="images/beerfinder.svg" class="card-img-top img-fluid p-4"
+                                <img src="images/default.png" class="card-img-top img-fluid p-4"
                                     alt="{{ $local->name }}">
                             @endif
                             <div class="card-body">

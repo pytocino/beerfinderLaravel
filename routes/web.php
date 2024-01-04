@@ -80,6 +80,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::put('/dashboard/locales/{id}', [DashboardController::class, 'updateLocal'])->name('dashboard.locales.update');
 
+Route::post('/agregar-cerveza', [DashboardController::class, 'agregarCerveza'])->name('agregarCerveza');
+
+Route::post('/eliminar-cerveza', [DashboardController::class, 'eliminarCerveza'])->name('eliminarCerveza');
+
+Route::get('/dashboard/cervezas/{id}/eliminar', [DashboardController::class, 'mostrarFormularioEliminar'])->name('formdeletebeers');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

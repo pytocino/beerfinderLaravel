@@ -15,12 +15,13 @@
                                     <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
                                         alt="{{ $local->name }}">
                                 @else
-                                    <img src="images/beerfinder.svg" class="card-img-top img-fluid p-4"
+                                    <img src="images/defaultlocal.png" class="card-img-top img-fluid p-4"
                                         alt="{{ $local->name }}">
                                 @endif
                             </div>
                             <div class="col-8">
                                 <div class="card-body">
+                                    {{ __('Local') }}
                                     <div class="h3 mb-3">
                                         {{ $local->name }}
                                     </div>
@@ -43,6 +44,104 @@
                                         </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card-footer">
+                                {{ __('Cervezas') }}
+                                @foreach ($local->beers as $beer)
+                                    <span
+                                        class="btn badge rounded-pill bg-warning text-dark text-lg my-2 position-relative"
+                                        alt="eliminar cerveza" data-bs-toggle="modal"
+                                        data-bs-target="#myDelModal_{{ $local->id }}_{{ $beer->id }}">{{ $beer->name }}
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                            <span class="visually-hidden">Eliminar cerveza</span>
+                                        </span>
+                                    </span>
+
+
+                                    <div class="modal" id="myDelModal_{{ $local->id }}_{{ $beer->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Eliminar {{ $beer->name }}</h5>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
+                                                </div>
+
+                                                <!-- Modal Body -->
+                                                <div class="modal-body">
+                                                    <p>¿Estás seguro de que quieres eliminar la cerveza
+                                                        "{{ $beer->name }}" del local "{{ $local->name }}"?</p>
+                                                    <form method="POST" action="{{ route('eliminarCerveza') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="local_id"
+                                                            value="{{ $local->id }}">
+                                                        <input type="hidden" name="beer_id"
+                                                            value="{{ $beer->id }}">
+                                                        <div class="text-end">
+                                                            <button type="submit"
+                                                                class="btn btn-danger">Eliminar</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <span class="btn badge rounded-pill bg-warning text-dark text-lg position-relative my-2"
+                                    alt="añadir cerveza" data-bs-toggle="modal"
+                                    data-bs-target="#myNewModal_{{ $local->id }}">Añadir cerveza
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
+                                        <span class="visually-hidden">Añadir cerveza</span>
+                                    </span>
+                                </span>
+
+
+
+                                <div class="modal" id="myNewModal_{{ $local->id }}">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">{{ $local->name }}</h4>
+                                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <form method="POST" action="{{ route('agregarCerveza') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="local_id" value="{{ $local->id }}">
+                                                    <div class="form-group mb-2">
+                                                        <label class="form-label" for="beer_id">Seleccionar
+                                                            Cerveza</label>
+                                                        <select name="beer_id" class="form-control" id="beer_id">
+                                                            <!-- Opciones para seleccionar una cerveza -->
+                                                            @foreach ($beers as $beer)
+                                                                <option value="{{ $beer->id }}">
+                                                                    {{ $beer->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group mb-2">
+                                                        <button type="submit"
+                                                            class="btn btn-success form-control">Agregar
+                                                            Cerveza</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

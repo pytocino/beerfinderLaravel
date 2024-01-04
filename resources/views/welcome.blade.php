@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Aqui te hacemos algunas sugerencias</h2>
+                <h2 class="text-center">Por si no tienes muy claro que quieres...</h2>
             </div>
             @foreach ($beers as $beer)
                 <div class="col-6 col-md-4 mb-4">
@@ -22,7 +22,7 @@
                                 <img src="{{ Storage::url($beer->image) }}" class="card-img-top img-fluid mb-2"
                                     alt="{{ $beer->name }}">
                             @else
-                                <img src="images/beerfinder.svg" class="card-img-top img-fluid mb-2"
+                                <img src="images/defaultbeer.png" class="card-img-top img-fluid mb-2"
                                     alt="{{ $beer->name }}">
                             @endif
                             <h5 class="card-title">{{ $beer->name }}</h5>

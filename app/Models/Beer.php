@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Beer extends Model
 {
     use HasFactory;
+    public function locals()
+    {
+        return $this->belongsToMany(Local::class, 'beerlocals');
+    }
 }
