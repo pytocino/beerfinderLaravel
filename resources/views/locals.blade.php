@@ -27,9 +27,9 @@
                                     alt="{{ $local->name }}">
                             @endif
                             <div class="card-body">
-                                <h5 class="card-title">{{ $local->name }}</h5>
+                                <h4 class="card-title">{{ $local->name }}</h4>
+                                <h5 class="card-text">{{ $local->type }}</h5>
                                 <p class="card-text">{{ $local->description }}</p>
-                                <p class="card-text">{{ $local->type }}</p>
                                 @if ($local->type === 'Restaurante')
                                     <h6>Contacto</h6>
                                     <p class="card-text">{{ $local->website }}</p>

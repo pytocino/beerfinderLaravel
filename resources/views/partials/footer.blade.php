@@ -31,7 +31,7 @@
                 <h5 class="text-uppercase mb-4">Asistencia</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="{{ route('contactEmpresas') }}">¿Eres una empresa? Contactanos</a>
+                        <a href="{{ route('contactLocals') }}">¿Eres una empresa? Contactanos</a>
                     </li>
                     <li>
                         <a href="{{ route('contactUsuarios') }}">Habla con nosotros</a>

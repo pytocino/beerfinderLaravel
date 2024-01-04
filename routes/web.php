@@ -6,6 +6,8 @@ use App\Http\Controllers\LocalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,13 +36,19 @@ Route::get('/blog', function () {
     return view('blog');
 })->name('blog');
 
-Route::get('/contactUsuarios', function () {
+Route::get('/usuarios', function () {
     return view('form');
 })->name('contactUsuarios');
 
-Route::get('/contactLocals', function () {
+Route::get('/locales', function () {
     return view('eform');
-})->name('contactEmpresas');
+})->name('contactLocals');
+
+Route::post('/locales', [ContactController::class, 'sendLocalEmail'])->name('contactLocals');
+
+Route::post('/usuarios', [ContactController::class, 'sendUserEmail'])->name('contactUsuarios');
+
+
 
 Route::get('/faq', function () {
     return view('faq');

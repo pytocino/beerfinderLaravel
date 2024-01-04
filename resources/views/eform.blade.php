@@ -6,11 +6,10 @@
     @include('partials.header')
     <main class="container">
         <div class="my-3">
-            <h1 class="text-center">Formulario de contacto</h1>
             <p>Gracias por tu interés en contactar con nosotros. Estamos encantados de escucharte y responder a
                 cualquier consulta que tengas. Por favor, completa el formulario a continuación y nos pondremos en
                 contacto contigo lo antes posible.</p>
-            <form action="" method="POST">
+            <form action="{{ action([App\Http\Controllers\ContactController::class, 'sendLocalEmail']) }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
@@ -27,7 +26,7 @@
                     <label for="message" class="form-label">Mensaje</label>
                     <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary" disabled>Enviar</button>
             </form>
         </div>
     </main>

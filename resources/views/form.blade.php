@@ -6,11 +6,10 @@
     @include('partials.header')
     <main class="container">
         <div class="my-3">
-            <h1 class="text-center">Contáctanos</h1>
             <p>¡Hola! En BeerFinder, valoramos mucho tu opinión y estamos aquí para ayudarte. Si tienes preguntas,
                 comentarios o sugerencias sobre nuestra aplicación, no dudes en ponerte en contacto con nosotros.
                 Completa el formulario a continuación y estaremos encantados de atenderte.</p>
-            <form action="" method="POST">
+            <form action="{{ action([App\Http\Controllers\ContactController::class, 'sendUserEmail']) }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
@@ -27,7 +26,7 @@
                     <label for="message" class="form-label">Mensaje</label>
                     <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary" disabled>Enviar</button>
             </form>
         </div>
     </main>
