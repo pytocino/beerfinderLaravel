@@ -18,40 +18,32 @@ class DashboardController extends Controller
         return view('dashboard', ['locals' => $locals]);
     }
 
-    public function editLocal(Request $request)
+    public function updateLocal(Request $request, $id)
     {
-        // Obtener el id del local por su nombre
-        $name = $request->input('name');
-        $id_name = Local::where('name', $name)->first();
+        // Encuentra el local por su ID
+        $local = Local::findOrFail($id);
 
-        $local = Local::find($id_name->id);
-        // Verificar si el local existe
-        if (!$local) {
-            return redirect()->back()->with('error', 'Local not found');
-        }
-
-        // Validar los datos del formulario de edición
-        $validatedData = request()->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'region' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'website' => 'required|string|max:255',
+        // Actualiza los datos del local con los valores del formulario
+        $local->update([
+            'type' => $request->input('type'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'address' => $request->input('address'),
+            'description' => $request->input('description'),
+            'website' => $request->input('website'),
+            'city' => $request->input('city'),
+            'region' => $request->input('region'),
         ]);
 
-        // Actualizar los datos del local
-        $local->name = $validatedData['name'];
-        $local->address = $validatedData['address'];
-        $local->city = $validatedData['city'];
-        $local->state = $validatedData['state'];
-        $local->region = $validatedData['region'];
-        $local->email = $validatedData['email'];
-        $local->phone = $validatedData['phone'];
-        $local->website = $validatedData['website'];
-        $local->update($request->all() + $validatedData);
+        // Maneja la actualización de la imagen si se ha cargado una nueva
+        if ($request->hasFile('imagen')) {
+            // Procesa y guarda la imagen
+            $imagePath = $request->file('imagen')->store('ruta_de_almacenamiento');
+            $local->image = $imagePath;
+            $local->save();
+        }
 
-        return redirect()->back()->with('success', 'Local updated successfully');
+        // Redirecciona o devuelve una respuesta apropiada (puede ser una redirección a la misma página)
+        return redirect()->back()->with('success', 'Local actualizado exitosamente');
     }
 }
