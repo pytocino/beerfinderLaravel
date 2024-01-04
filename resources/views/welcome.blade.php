@@ -10,6 +10,7 @@
                 @include('partials.finder')
             </div>
         </div>
+        {{-- SUGERENCIAS DE CERVEZAS --}}
         <div class="row">
             <div class="col-12">
                 <h2 class="text-center">Por si no tienes muy claro que quieres...</h2>
@@ -19,10 +20,10 @@
                     <div class="card">
                         <div class="card-body">
                             @if ($beer->image)
-                                <img src="{{ Storage::url($beer->image) }}" class="card-img-top img-fluid mb-2"
-                                    alt="{{ $beer->name }}">
+                                <img src="{{ Storage::url($beer->image) }}"
+                                    class="card-img-top img-fluid img-thumbnail mb-2" alt="{{ $beer->name }}">
                             @else
-                                <img src="images/defaultbeer.png" class="card-img-top img-fluid mb-2"
+                                <img src="images/defaultbeer.png" class="card-img-top img-fluid img-thumbnail mb-2"
                                     alt="{{ $beer->name }}">
                             @endif
                             <h5 class="card-title">{{ $beer->name }}</h5>

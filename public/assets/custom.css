@@ -19,3 +19,7 @@ a:hover {
     z-index: 99;
     cursor: pointer;
 }
+
+.hidden {
+    display: none;
+}

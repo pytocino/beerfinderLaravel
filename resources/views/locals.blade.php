@@ -17,17 +17,30 @@
                 </div>
             @else
                 @foreach ($locals as $local)
-                    <div class="col-12 col-md-6 mb-4">
+                    <div class="col-12 col-md-3 mb-4">
                         <div class="card">
                             @if ($local->image)
-                                <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
+                                <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid p-4"
                                     alt="{{ $local->name }}">
                             @else
                                 <img src="images/default.png" class="card-img-top img-fluid p-4"
                                     alt="{{ $local->name }}">
                             @endif
                             <div class="card-body">
-                                <h4 class="card-title">{{ $local->name }}</h4>
+
+
+                                <div class="h3 mb-3 d-flex align-items-center">
+                                    <h4 class="card-title">{{ $local->name }}</h4>
+                                    @if ($local->verified)
+                                        <img src="images/verificado.png" alt="icono de verificado" class="ml-2">
+
+                                        <a target="_blank" href="https://icons8.com/icon/6xO3fnY41hu2/verificado"
+                                            hidden>verificado</a>
+                                        <p hidden>icono de</p><a target="_blank" href="https://icons8.com"
+                                            hidden>Icons8</a>
+                                    @endif
+                                </div>
+
                                 <h5 class="card-text">{{ $local->type }}</h5>
                                 <p class="card-text">{{ $local->description }}</p>
                                 @if ($local->type === 'Restaurante')

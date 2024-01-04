@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('website')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
         });
     }

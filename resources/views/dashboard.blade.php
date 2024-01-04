@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-4">
                                 @if ($local->image)
-                                    <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid"
+                                    <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid p-4"
                                         alt="{{ $local->name }}">
                                 @else
                                     <img src="images/defaultlocal.png" class="card-img-top img-fluid p-4"
@@ -22,9 +22,18 @@
                             <div class="col-8">
                                 <div class="card-body">
                                     {{ __('Local') }}
-                                    <div class="h3 mb-3">
-                                        {{ $local->name }}
+                                    <div class="h3 mb-3 d-flex align-items-center">
+                                        <span>{{ $local->name }}</span>
+                                        @if ($local->verified)
+                                            <img src="images/verificado.png" alt="icono de verificado" class="ml-2">
+
+                                            <a target="_blank" href="https://icons8.com/icon/6xO3fnY41hu2/verificado"
+                                                hidden>verificado</a>
+                                            <p hidden>icono de</p><a target="_blank" href="https://icons8.com"
+                                                hidden>Icons8</a>
+                                        @endif
                                     </div>
+
                                     <div class="info">
                                         <p>{{ $local->type }}</p>
                                         <p>{{ $local->email }}</p>

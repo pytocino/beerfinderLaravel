@@ -62,7 +62,7 @@ window.onload = function () {
         }
     }
 
-    function generarLocalización() {
+    function generarLocalizacion() {
         const opciones = {
             watch: true,
             setView: true,
@@ -78,7 +78,8 @@ window.onload = function () {
     }
 
     const botonCoordenadas = document.getElementById("coordenadasBoton");
+
     if (navigator.geolocation) {
-        botonCoordenadas.addEventListener("click", generarLocalización);
+        botonCoordenadas.addEventListener("click", generarLocalizacion);
     }
 };
