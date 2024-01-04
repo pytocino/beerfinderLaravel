@@ -38,7 +38,8 @@
             @endif
         </div>
         <div class="row">
-            {{ $locals->links() }}
+            {{ $locals->appends(request()->query())->links() }}
+
         </div>
         <div class="row mt-4">
             <div class="col-12">

@@ -48,6 +48,9 @@
                         <a href="{{ route('register') }}">Regístrate</a>
                     </li>
                     <li>
+                        <a href="{{ route('dashboard') }}">Panel de control</a>
+                    </li>
+                    <li>
                         <a href="#!">Oportunidades</a>
                     </li>
                 </ul>

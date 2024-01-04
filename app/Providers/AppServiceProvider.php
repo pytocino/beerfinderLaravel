@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\Paginator as PaginationPaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,7 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Model::unguard();
-        PaginationPaginator::useBootstrap();
+        Paginator::useBootstrapFive();
     }
 }
