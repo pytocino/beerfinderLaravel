@@ -67,8 +67,8 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <label class="form-label" for="descriptcion">Descripcion</label>
-                        <textarea name="descriptcion" class="form-control" id="descriptcion" rows="3" style="resize: none">{{ $local->description }}</textarea>
+                        <label class="form-label" for="description">Descripcion</label>
+                        <textarea name="description" class="form-control" id="description" rows="3" style="resize: none">{{ $local->description }}</textarea>
                     </div>
 
                     <div class="form-group mb-2">

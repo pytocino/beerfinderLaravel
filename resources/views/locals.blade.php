@@ -30,6 +30,12 @@
                                 <h5 class="card-title">{{ $local->name }}</h5>
                                 <p class="card-text">{{ $local->description }}</p>
                                 <p class="card-text">{{ $local->type }}</p>
+                                @if ($local->type === 'Restaurante')
+                                    <h6>Contacto</h6>
+                                    <p class="card-text">{{ $local->website }}</p>
+                                    <p class="card-text">{{ $local->email }}</p>
+                                    <p class="card-text">{{ $local->phone }}</p>
+                                @endif
                                 <a class="btn btn-dark" href="{{ $local->address }}">Como llegar</a>
                             </div>
                         </div>
@@ -39,7 +45,6 @@
         </div>
         <div class="row">
             {{ $locals->appends(request()->query())->links() }}
-
         </div>
         <div class="row mt-4">
             <div class="col-12">
