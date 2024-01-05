@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
+        $locales = Local::all();
         $beers = Beer::all();
         $user = Auth::user();
         $locals = DB::table('locals')
@@ -20,7 +20,7 @@ class DashboardController extends Controller
             ->get();
 
         $locals = Local::with('beers')->where('user_id', $user->id)->get();
-        return view('dashboard', ['locals' => $locals, 'beers' => $beers]);
+        return view('dashboard', ['locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales]);
     }
 
     public function agregarCerveza(Request $request)
