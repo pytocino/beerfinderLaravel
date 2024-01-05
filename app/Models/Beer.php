@@ -12,4 +12,22 @@ class Beer extends Model
     {
         return $this->belongsToMany(Local::class, 'beerlocals');
     }
+
+    protected $fillable = [
+        'name',
+        'description',
+        'image',
+        'type',
+        'country',
+        'city',
+        'region',
+        'graduation',
+        'color',
+        'taste',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

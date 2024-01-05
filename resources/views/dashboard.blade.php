@@ -6,19 +6,223 @@
     </x-slot>
     @if ($user->name == 'admin')
         <div class="container" id="admin">
-            <div>
-                <h2 class="h2">Locales</h2>
+            <div class="row">
+                <h2 class="h2 text-center mt-3">Locales</h2>
                 @foreach ($locales as $local)
-                    <p>{{ $local->name }}</p>
+                    <div class="col-3">
+                        <div class="card p-3 m-3">
+                            <div class="h3 mb-3 d-flex align-items-center">
+                                <span>{{ $local->name }}</span>
+                                @if ($local->verified)
+                                    <img src="images/verificado.png" alt="icono de verificado" class="ml-2">
+
+                                    <a target="_blank" href="https://icons8.com/icon/6xO3fnY41hu2/verificado"
+                                        hidden>verificado</a>
+                                    <p hidden>icono de</p><a target="_blank" href="https://icons8.com" hidden>Icons8</a>
+                                @endif
+                            </div>
+                            <form method="POST" action="{{ route('dashboard.locales.update', ['id' => $local->id]) }}"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="id" value="{{ $local->id }}">
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="name">Nombre</label>
+                                    <input type="text" name="name" id="name" class="form-control"
+                                        value="{{ $local->name }}">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="type">Tipo</label>
+                                    <select name="type" class="form-control" id="type" class="form-control">
+                                        <option value="{{ $local->type }}" selected>{{ $local->type }}
+                                        </option>
+                                        <option value="Pub">Pub</option>
+                                        <option value="Bar">Bar</option>
+                                        <option value="Cervecería">Cervecería</option>
+                                        <option value="Restaurante">Restaurante</option>
+                                        <option value="Club">Club</option>
+                                        <option value="Tienda">Tienda</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input type="text" name="email" class="form-control" id="email"
+                                        value="{{ $local->email }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="phone">Telefono</label>
+                                    <input type="text" name="phone" class="form-control" id="phone"
+                                        value="{{ $local->phone }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="address">Dirección</label>
+                                    <input type="text" name="address" class="form-control" id="address"
+                                        value="{{ $local->address }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="latitude">Latitud</label>
+                                    <input type="text" name="latitude" class="form-control" id="latitude"
+                                        value="{{ $local->latitude }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="longitude">Longitud</label>
+                                    <input type="text" name="longitude" class="form-control" id="longitude"
+                                        value="{{ $local->longitude }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="website">Web</label>
+                                    <input type="text" name="website" class="form-control" id="website"
+                                        value="{{ $local->website }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="city">Ciudad</label>
+                                    <input type="text" name="city" class="form-control" id="city"
+                                        value="{{ $local->city }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="region">Región</label>
+                                    <input type="text" name="region" class="form-control" id="region"
+                                        value="{{ $local->region }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="description">Descripcion</label>
+                                    <textarea name="description" class="form-control" id="description" rows="3" style="resize: none">{{ $local->description }}</textarea>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="verified">Verificado</label>
+                                    <select name="verified" class="form-control" id="verified"
+                                        class="form-control">
+                                        @if ($local->verified)
+                                            <option value="1" selected>Si</option>
+                                            <option value="0">No</option>
+                                        @else
+                                            <option value="1">Si</option>
+                                            <option value="0" selected>No</option>
+                                        @endif
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="image">Imagen</label>
+                                    <input type="file" class="form-control-file" id="imagen" name="imagen">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <button type="submit" class="btn bg-success form-control">Editar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 @endforeach
+                @if (session('success'))
+                    <div class="alert alert-success fixed-bottom right-0 p-3 m-3 fade-out"
+                        style="position: fixed; bottom: 0; right: 0;">
+                        {{ session('success') }}
+                    </div>
+                @endif
             </div>
-            <div>
-                <h2 class="h2">Cervezas</h2>
-                @foreach ($beers as $beer)
-                    <p>{{ $beer->name }}</p>
+            <div class="row">
+                <h2 class="h2 text-center my-3">Cervezas</h2>
+                @foreach ($cerves as $cerve)
+                    <div class="col-3">
+                        <div class="card p-3 m-3">
+                            <div class="h3 mb-3 d-flex align-items-center">
+                                <span>{{ $cerve->name }}</span>
+                            </div>
+                            <form method="POST"
+                                action="{{ route('dashboard.cervezas.update', ['id' => $cerve->id]) }}"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="id" value="{{ $cerve->id }}">
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="name">Nombre</label>
+                                    <input type="text" name="name" id="name" class="form-control"
+                                        value="{{ $cerve->name }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="color">Color</label>
+                                    <input type="text" name="color" id="color" class="form-control"
+                                        value="{{ $cerve->color }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="graduation">Graduacion</label>
+                                    <input type="text" name="graduation" id="graduation" class="form-control"
+                                        value="{{ $cerve->graduation }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="taste">Sabor</label>
+                                    <input type="text" name="taste" id="taste" class="form-control"
+                                        value="{{ $cerve->taste }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="type">Tipo</label>
+                                    <input type="text" name="type" id="type" class="form-control"
+                                        value="{{ $cerve->type }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="description">Descripcion</label>
+                                    <input type="text" name="description" id="description" class="form-control"
+                                        value="{{ $cerve->description }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="country">Pais</label>
+                                    <input type="text" name="country" id="country" class="form-control"
+                                        value="{{ $cerve->country }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="city">Ciudad</label>
+                                    <input type="text" name="city" id="city" class="form-control"
+                                        value="{{ $cerve->city }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="region">Region</label>
+                                    <input type="text" name="region" id="region" class="form-control"
+                                        value="{{ $cerve->region }}">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="image">Imagen</label>
+                                    <input type="file" class="form-control-file" id="imagen" name="imagen">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <button type="submit" class="btn bg-success form-control text-white">Modificar
+                                        Cerveza</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
                 @endforeach
             </div>
         </div>
+        @if (session('success'))
+            <div class="alert alert-success fixed-bottom right-0 p-3 m-3 fade-out"
+                style="position: fixed; bottom: 0; right: 0;">
+                {{ session('success') }}
+            </div>
+        @endif
     @else
         <main class="container">
             <div class="row my-5">
@@ -28,8 +232,8 @@
                             <div class="row">
                                 <div class="col-4">
                                     @if ($local->image)
-                                        <img src="{{ Storage::url($local->image) }}" class="card-img-top img-fluid p-4"
-                                            alt="{{ $local->name }}">
+                                        <img src="{{ Storage::url($local->image) }}"
+                                            class="card-img-top img-fluid p-4" alt="{{ $local->name }}">
                                     @else
                                         <img src="images/defaultlocal.png" class="card-img-top img-fluid p-4"
                                             alt="{{ $local->name }}">
@@ -57,7 +261,8 @@
                                             <p>{{ $local->email }}</p>
                                             <p>{{ $local->phone }}</p>
                                             <p>{{ $local->address }}</p>
-                                            <a href="{{ $local->website }}" target="_blank">{{ $local->website }}</a>
+                                            <a href="{{ $local->website }}"
+                                                target="_blank">{{ $local->website }}</a>
                                             <p>{{ $local->city }}</p>
                                             <p>{{ $local->region }}</p>
                                         </div>
@@ -109,8 +314,8 @@
                                                                 value="{{ $beer->id }}">
                                                             <div class="text-end">
                                                                 <button type="submit"
-                                                                    class="btn btn-danger">Eliminar</button>
-                                                                <button type="button" class="btn btn-secondary"
+                                                                    class="btn bg-danger">Eliminar</button>
+                                                                <button type="button" class="btn bg-dark"
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                             </div>
                                                         </form>
@@ -148,7 +353,8 @@
                                                         <div class="form-group mb-2">
                                                             <label class="form-label" for="beer_id">Seleccionar
                                                                 Cerveza</label>
-                                                            <select name="beer_id" class="form-control" id="beer_id">
+                                                            <select name="beer_id" class="form-control"
+                                                                id="beer_id">
                                                                 <!-- Opciones para seleccionar una cerveza -->
                                                                 @foreach ($beers as $beer)
                                                                     <option value="{{ $beer->id }}">

@@ -16,9 +16,12 @@ class Local extends Model
         'phone',
         'image',
         'address',
+        'latitude',
+        'longitude',
         'website',
         'city',
-        'region'
+        'region',
+        'verified',
     ];
 
     public function beers()

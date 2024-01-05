@@ -80,6 +80,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::put('/dashboard/locales/{id}', [DashboardController::class, 'updateLocal'])->name('dashboard.locales.update');
 
+Route::put('/dashboard/cervezas/{id}', [DashboardController::class, 'updateBeer'])->name('dashboard.cervezas.update');
+
 Route::post('/agregar-cerveza', [DashboardController::class, 'agregarCerveza'])->name('agregarCerveza');
 
 Route::post('/eliminar-cerveza', [DashboardController::class, 'eliminarCerveza'])->name('eliminarCerveza');

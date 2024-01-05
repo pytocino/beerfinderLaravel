@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Local::class);
     }
+
+    public function beers()
+    {
+        return $this->hasMany(Beer::class);
+    }
 }

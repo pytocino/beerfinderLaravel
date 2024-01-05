@@ -77,14 +77,14 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <button type="submit" class="btn-success form-control">Editar</button>
+                        <button type="submit" class="btn bg-success form-control">Editar</button>
                     </div>
                 </form>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn bg-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

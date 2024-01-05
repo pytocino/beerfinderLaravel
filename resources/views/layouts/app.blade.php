@@ -16,6 +16,35 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Coloca este código en el head de tu archivo HTML -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var alertElement = document.querySelector('.alert');
+
+            if (alertElement) {
+                setTimeout(function() {
+                    alertElement.style.display = 'none';
+                }, 4000);
+            }
+        });
+    </script>
+    <style>
+        /* Añade este código en tu hoja de estilos o entre etiquetas <style> en tu HTML */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 4s ease-in-out forwards;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
