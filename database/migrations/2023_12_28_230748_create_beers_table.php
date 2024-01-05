@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('beers', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->constrained('users', 'id');
             $table->string('name')->unique();
-            $table->string('color');
-            $table->float('graduation');
-            $table->string('taste');
-            $table->string('type');
-            $table->string('description');
+            $table->string('color')->nullable();
+            $table->float('graduation')->nullable();
+            $table->string('taste')->nullable();
+            $table->string('type')->nullable();
+            $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();

@@ -9,6 +9,7 @@ class Local extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'name',
         'type',
         'description',
@@ -18,11 +19,10 @@ class Local extends Model
         'address',
         'latitude',
         'longitude',
-        'website',
         'city',
         'region',
+        'website',
         'verified',
-        'user_id',
     ];
 
     public function beers()

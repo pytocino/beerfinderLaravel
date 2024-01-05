@@ -14,17 +14,18 @@ class Beer extends Model
     }
 
     protected $fillable = [
+        'user_id',
+
         'name',
+        'color',
+        'graduation',
+        'taste',
+        'type',
         'description',
         'image',
-        'type',
         'country',
         'city',
         'region',
-        'graduation',
-        'color',
-        'taste',
-        'user_id',
     ];
 
     public function user()

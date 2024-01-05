@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('locals', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->constrained('users');
+            $table->string('user_id')->constrained('users', 'id');
             $table->string('name')->unique();
             $table->string('type')->nullable();
             $table->string('description')->nullable();
