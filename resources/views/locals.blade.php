@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @include('partials.head')
+<script>
+    let locales = @json($locals);
+</script>
 
 <body>
     @include('partials.header')
@@ -27,8 +30,6 @@
                                     alt="{{ $local->name }}">
                             @endif
                             <div class="card-body">
-
-
                                 <div class="h3 mb-3 d-flex align-items-center">
                                     <h4 class="card-title">{{ $local->name }}</h4>
                                     @if ($local->verified)
