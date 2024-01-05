@@ -4,10 +4,16 @@
             {{ __('Panel de control') }}
         </h2>
     </x-slot>
+    <div class="text-center my-5">
+        <a href="#cervezas" class="btn btn-primary mx-2">Cervezas</a>
+        <a href="#locales" class="btn btn-primary mx-2">Locales</a>
+        <input type="text" id="searchInput" placeholder="Buscar...">
+    </div>
+
     @if ($user->name == 'admin')
         <div class="container" id="admin">
-            <div class="row">
-                <h2 class="h2 text-center mt-3">Locales</h2>
+            <div class="row" id="locales">
+                <h2 class="h2 text-center">Locales</h2>
                 @foreach ($locales as $local)
                     <div class="col-3">
                         <div class="card p-3 m-3">
@@ -132,7 +138,7 @@
                     </div>
                 @endif
             </div>
-            <div class="row">
+            <div class="row" id="cervezas">
                 <h2 class="h2 text-center my-3">Cervezas</h2>
                 @foreach ($cerves as $cerve)
                     <div class="col-3">
