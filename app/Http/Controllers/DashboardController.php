@@ -67,13 +67,14 @@ class DashboardController extends Controller
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'address' => $request->input('address'),
-            'latitude' => $request->input('latitude'),
-            'longitude' => $request->input('longitude'),
+            'latitudee' => $request->input('latitudee'),
+            'longitudee' => $request->input('longitudee'),
             'description' => $request->input('description'),
             'website' => $request->input('website'),
             'city' => $request->input('city'),
             'region' => $request->input('region'),
             'verified' => $request->input('verified'),
+            'user_id' => $request->input('user_id'),
         ]);
 
         // Maneja la actualización de la imagen si se ha cargado una nueva
@@ -132,5 +133,66 @@ class DashboardController extends Controller
 
         // Redirecciona o devuelve una respuesta apropiada (puede ser una redirección a la misma página)
         return redirect()->back()->with('success', 'Local eliminado exitosamente');
+    }
+
+    public function createLocal()
+    {
+        return view('partials.createlocal'); // name de la vista del formulario de creación de locales
+    }
+
+    public function storeLocal(Request $request)
+    {
+        $nuevoLocal = new Local();
+        $nuevoLocal->name = $request->input('name');
+        $nuevoLocal->type = $request->input('type');
+        $nuevoLocal->email = $request->input('email');
+        $nuevoLocal->phone = $request->input('phone');
+        $nuevoLocal->address = $request->input('address');
+        $nuevoLocal->latitude = $request->input('latitude');
+        $nuevoLocal->longitude = $request->input('longitude');
+        $nuevoLocal->description = $request->input('description');
+        $nuevoLocal->website = $request->input('website');
+        $nuevoLocal->city = $request->input('ciudad');
+        $nuevoLocal->region = $request->input('region');
+        $nuevoLocal->verified = $request->input('verified');
+        $nuevoLocal->user_id = $request->input('user_id');
+        $nuevoLocal->save();
+        Log::info('Nuevo local creado: ' . $nuevoLocal);
+        return redirect()->route('dashboard')->with('success', 'Local creado exitosamente');
+    }
+
+    public function deleteBeer($id)
+    {
+        $beer = Beer::findOrFail($id);
+
+        $beer->delete();
+
+        return redirect()->back()->with('success', 'Cerveza eliminada exitosamente');
+    }
+
+    public function createBeer()
+    {
+        return view('partials.createbeer');
+    }
+
+    public function storeBeer(Request $request)
+    {
+        $user = Auth::user();
+
+        $nuevaCerveza = new Beer();
+        $nuevaCerveza->name = $request->input('name');
+        $nuevaCerveza->color = $request->input('color');
+        $nuevaCerveza->graduation = $request->input('graduation');
+        $nuevaCerveza->taste = $request->input('taste');
+        $nuevaCerveza->type = $request->input('type');
+        $nuevaCerveza->description = $request->input('description');
+        $nuevaCerveza->country = $request->input('country');
+        $nuevaCerveza->city = $request->input('city');
+        $nuevaCerveza->region = $request->input('region');
+        $nuevaCerveza->image = $request->input('image');
+        $nuevaCerveza->user_id = $request->input('user_id');
+        $nuevaCerveza->save();
+        Log::info('Nueva cerveza creada: ' . $nuevaCerveza);
+        return redirect()->route('dashboard')->with('success', 'Cerveza creada exitosamente');
     }
 }

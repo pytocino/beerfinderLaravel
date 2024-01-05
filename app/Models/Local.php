@@ -22,6 +22,7 @@ class Local extends Model
         'city',
         'region',
         'verified',
+        'user_id',
     ];
 
     public function beers()

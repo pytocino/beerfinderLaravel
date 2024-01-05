@@ -88,6 +88,17 @@ Route::post('/eliminar-cerveza', [DashboardController::class, 'eliminarCerveza']
 
 Route::get('/dashboard/cervezas/{id}/eliminar', [DashboardController::class, 'mostrarFormularioEliminar'])->name('formdeletebeers');
 
+Route::get('/dashboard/locales/create', [DashboardController::class, 'createLocal'])->name('dashboard.locales.create');
+
+Route::post('/dashboard/locales', [DashboardController::class, 'storeLocal'])->name('guardar_local');
+
+Route::get('/dashboard/cerveza/create', [DashboardController::class, 'createBeer'])->name('dashboard.cerveza.create');
+
+Route::post('/dashboard/cerveza', [DashboardController::class, 'storeBeer'])->name('guardar_cerveza');
+
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

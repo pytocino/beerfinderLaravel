@@ -24,6 +24,7 @@ class Beer extends Model
         'graduation',
         'color',
         'taste',
+        'user_id',
     ];
 
     public function user()

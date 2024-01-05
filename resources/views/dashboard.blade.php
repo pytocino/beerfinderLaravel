@@ -4,16 +4,16 @@
             {{ __('Panel de control') }}
         </h2>
     </x-slot>
-    <div class="text-center my-5">
+    <div class=" text-center my-5">
         <a href="#cervezas" class="btn btn-primary mx-2">Cervezas</a>
         <a href="#locales" class="btn btn-primary mx-2">Locales</a>
         <input type="text" id="searchInput" placeholder="Buscar...">
     </div>
-
     @if ($user->name == 'admin')
         <div class="container" id="admin">
             <div class="row" id="locales">
                 <h2 class="h2 text-center">Locales</h2>
+                @include('partials.createlocal')
                 @foreach ($locales as $local)
                     <div class="col-3">
                         <div class="card p-3 m-3">
@@ -125,6 +125,13 @@
                                 </div>
 
                                 <div class="form-group mb-2">
+                                    <label class="form-label" for="user_id">User ID</label>
+                                    <input type="number" class="form-control-file" id="user_id" name="user_id"
+                                        value="{{ $local->user_id }}">
+                                </div>
+
+
+                                <div class="form-group mb-2">
                                     <button type="submit" class="btn bg-success form-control">Editar</button>
                                 </div>
                             </form>
@@ -140,6 +147,7 @@
             </div>
             <div class="row" id="cervezas">
                 <h2 class="h2 text-center my-3">Cervezas</h2>
+                @include('partials.createbeer')
                 @foreach ($cerves as $cerve)
                     <div class="col-3">
                         <div class="card p-3 m-3">
@@ -216,9 +224,12 @@
                                     <button type="submit" class="btn bg-success form-control text-white">Modificar
                                         Cerveza</button>
                                 </div>
+
+                                <div class="form-group mb-2" hidden>
+                                    <p>{{ $cerve->user_id }}</p>
+                                </div>
                             </form>
                         </div>
-
                     </div>
                 @endforeach
             </div>
