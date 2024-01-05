@@ -1,10 +1,10 @@
-<div class="col-3">
+<div class="col-12">
     <div class="card p-3 m-3">
         <div class="h3 mb-3 d-flex align-items-center">
             <span>AÑADIR LOCAL</span>
         </div>
 
-        <form method="POST" action="{{ route('guardar_local') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('guardar_local2') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-2">
                 <label class="form-label" for="name">Nombre</label>
@@ -41,16 +41,6 @@
             </div>
 
             <div class="form-group mb-2">
-                <label class="form-label" for="latitude">Latitud</label>
-                <input type="text" name="latitude" class="form-control" id="latitude">
-            </div>
-
-            <div class="form-group mb-2">
-                <label class="form-label" for="longitude">Longitud</label>
-                <input type="text" name="longitude" class="form-control" id="longitude">
-            </div>
-
-            <div class="form-group mb-2">
                 <label class="form-label" for="website">Web</label>
                 <input type="text" name="website" class="form-control" id="website">
             </div>
@@ -71,22 +61,21 @@
             </div>
 
             <div class="form-group mb-2">
+                <button type="submit" class="btn bg-success form-control">Crear</button>
+            </div>
+
+            <div class="form-group mb-2" hidden>
                 <label class="form-label" for="verified">Verificado</label>
                 <select name="verified" id="verified" class="form-control">
-                    <option value="1">Si</option>
                     <option value="0" selected>No</option>
                 </select>
             </div>
 
-            <div class="form-group mb-2">
-                <label class="form-label" for="user_id">User id</label>
-                <select class="form-control" id="user_id" name="user_id">
-                    <option value="1" selected>1</option>
+            <div class="form-group mb-2" hidden>
+                <label class="form-label" for="user_id">User ID</label>
+                <select name="user_id" id="user_id" class="form-control">
+                    <option value="{{ $user->id }}" selected>{{ $user->id }}</option>
                 </select>
-            </div>
-
-            <div class="form-group mb-2">
-                <button type="submit" class="btn bg-success form-control">Crear</button>
             </div>
         </form>
         @if (session('success'))

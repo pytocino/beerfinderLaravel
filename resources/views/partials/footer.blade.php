@@ -78,7 +78,8 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Correo electrónico"
                             aria-label="Correo electrónico" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Suscribirse</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                            disabled>Suscribirse</button>
                     </div>
                 </form>
             </div>

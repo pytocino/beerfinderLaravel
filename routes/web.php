@@ -48,8 +48,6 @@ Route::post('/locales', [ContactController::class, 'sendLocalEmail'])->name('con
 
 Route::post('/usuarios', [ContactController::class, 'sendUserEmail'])->name('contactUsuarios');
 
-
-
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
@@ -90,11 +88,15 @@ Route::get('/dashboard/cervezas/{id}/eliminar', [DashboardController::class, 'mo
 
 Route::get('/dashboard/locales/create', [DashboardController::class, 'createLocal'])->name('dashboard.locales.create');
 
-Route::post('/dashboard/locales', [DashboardController::class, 'storeLocal'])->name('guardar_local');
+Route::get('/dashboard/locales/create', [DashboardController::class, 'createLocal2'])->name('dashboard.locales.createuser');
+
+Route::post('/guardar_local', [DashboardController::class, 'storeLocal'])->name('guardar_local');
+
+Route::post('/dashboard/locales', [DashboardController::class, 'storeLocal2'])->name('guardar_local2');
 
 Route::get('/dashboard/cerveza/create', [DashboardController::class, 'createBeer'])->name('dashboard.cerveza.create');
 
-Route::post('/dashboard/cerveza', [DashboardController::class, 'storeBeer'])->name('guardar_cerveza');
+Route::post('/guardar_cerveza', [DashboardController::class, 'storeBeer'])->name('guardar_cerveza');
 
 
 

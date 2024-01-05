@@ -140,7 +140,33 @@ class DashboardController extends Controller
         return view('partials.createlocal'); // name de la vista del formulario de creación de locales
     }
 
+    public function createLocal2()
+    {
+        return view('partials.createlocal2'); // name de la vista del formulario de creación de locales
+    }
+
     public function storeLocal(Request $request)
+    {
+        $nuevoLocal = new Local();
+        $nuevoLocal->name = $request->input('name');
+        $nuevoLocal->type = $request->input('type');
+        $nuevoLocal->email = $request->input('email');
+        $nuevoLocal->phone = $request->input('phone');
+        $nuevoLocal->address = $request->input('address');
+        $nuevoLocal->latitude = $request->input('latitude');
+        $nuevoLocal->longitude = $request->input('longitude');
+        $nuevoLocal->description = $request->input('description');
+        $nuevoLocal->website = $request->input('website');
+        $nuevoLocal->city = $request->input('ciudad');
+        $nuevoLocal->region = $request->input('region');
+        $nuevoLocal->verified = $request->input('verified');
+        $nuevoLocal->user_id = $request->input('user_id');
+        $nuevoLocal->save();
+        Log::info('Nuevo local creado: ' . $nuevoLocal);
+        return redirect()->route('dashboard')->with('success', 'Local creado exitosamente');
+    }
+
+    public function storeLocal2(Request $request)
     {
         $nuevoLocal = new Local();
         $nuevoLocal->name = $request->input('name');

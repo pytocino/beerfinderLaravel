@@ -4,12 +4,13 @@
             {{ __('Panel de control') }}
         </h2>
     </x-slot>
-    <div class=" text-center my-5">
-        <a href="#cervezas" class="btn btn-primary mx-2">Cervezas</a>
-        <a href="#locales" class="btn btn-primary mx-2">Locales</a>
-        <input type="text" id="searchInput" placeholder="Buscar...">
-    </div>
+
     @if ($user->name == 'admin')
+        <div class=" text-center my-5">
+            <a href="#cervezas" class="btn btn-primary mx-2">Cervezas</a>
+            <a href="#locales" class="btn btn-primary mx-2">Locales</a>
+            <input type="text" id="searchInput" placeholder="Buscar...">
+        </div>
         <div class="container" id="admin">
             <div class="row" id="locales">
                 <h2 class="h2 text-center">Locales</h2>
@@ -43,6 +44,8 @@
                                     <select name="type" class="form-control" id="type" class="form-control">
                                         <option value="{{ $local->type }}" selected>{{ $local->type }}
                                         </option>
+                                        <option value="Cafeteria">Cafeteria</option>
+                                        <option value="Discoteca">Discoteca</option>
                                         <option value="Pub">Pub</option>
                                         <option value="Bar">Bar</option>
                                         <option value="Cervecería">Cervecería</option>
@@ -331,8 +334,8 @@
                                                                 value="{{ $beer->id }}">
                                                             <div class="text-end">
                                                                 <button type="submit"
-                                                                    class="btn bg-danger">Eliminar</button>
-                                                                <button type="button" class="btn bg-dark"
+                                                                    class="btn bg-danger text-white">Eliminar</button>
+                                                                <button type="button" class="btn bg-dark text-white"
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                             </div>
                                                         </form>
@@ -382,14 +385,14 @@
 
                                                         <div class="form-group mb-2">
                                                             <button type="submit"
-                                                                class="btn btn-success form-control">Agregar
+                                                                class="btn bg-success form-control">Agregar
                                                                 Cerveza</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-danger"
+                                                    <button class="btn bg-danger"
                                                         data-bs-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </div>
@@ -402,7 +405,8 @@
                         @include('partials.editLocal')
                     @endforeach
                 @else
-                    <p>No hay locales asociados a este usuario.</p>
+                    <p>No hay locales asociados a <strong>{{ $user->name }}</strong>.</p>
+                    @include('partials.createlocal2')
                 @endif
             </div>
         </main>

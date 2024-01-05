@@ -76,6 +76,13 @@
                         <input type="file" class="form-control-file" id="imagen" name="imagen">
                     </div>
 
+                    <div class="form-group mb-2" hidden>
+                        <label class="form-label" for="user_id">User ID</label>
+                        <select name="user_id" id="user_id" class="form-control">
+                            <option value="{{ $user->id }}" selected>{{ $user->id }}</option>
+                        </select>
+                    </div>
+
                     <div class="form-group mb-2">
                         <button type="submit" class="btn bg-success form-control">Editar</button>
                     </div>
