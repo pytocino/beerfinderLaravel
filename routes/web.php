@@ -98,10 +98,6 @@ Route::get('/dashboard/cerveza/create', [DashboardController::class, 'createBeer
 
 Route::post('/guardar_cerveza', [DashboardController::class, 'storeBeer'])->name('guardar_cerveza');
 
-Route::get('/actualizar-rama', [GitController::class, 'actualizarRama'])->name('actualizar.rama');
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
