@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\GitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +98,9 @@ Route::get('/dashboard/cerveza/create', [DashboardController::class, 'createBeer
 
 Route::post('/guardar_cerveza', [DashboardController::class, 'storeBeer'])->name('guardar_cerveza');
 
+// routes/web.php
+
+Route::get('/actualizar-rama', [GitController::class, 'actualizarRama'])->name('actualizar.rama');
 
 
 

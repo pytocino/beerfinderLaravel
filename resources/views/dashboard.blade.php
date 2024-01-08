@@ -7,6 +7,19 @@
 
     @if ($user->name == 'admin')
         <div class=" text-center my-5">
+            <!-- Vista del panel de administrador -->
+            <a href="{{ route('actualizar.rama') }}" class="text-white btn bg-primary">Actualizar Rama</a>
+            @if (session('success'))
+                <div class="alert alert-success fixed-bottom right-0 p-3 m-3 fade-out"
+                    style="position: fixed; bottom: 0; right: 0;">
+                    {{ session('exito') }}
+                </div>
+            @else
+                <div class="alert alert-warning fixed-bottom right-0 p-3 m-3 fade-out"
+                    style="position: fixed; bottom: 0; right: 0;" hidden>
+                    {{ session('error') }}
+                </div>
+            @endif
             <a href="#cervezas" class="btn btn-primary mx-2">Cervezas</a>
             <a href="#locales" class="btn btn-primary mx-2">Locales</a>
             <input type="text" id="searchInput" placeholder="Buscar...">
