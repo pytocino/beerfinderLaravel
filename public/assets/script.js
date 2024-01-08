@@ -27,7 +27,7 @@ window.onload = function () {
             radius: 12,
         }).addTo(mapa);
 
-        locals.forEach(function (ubicacion) {
+        locales.data.forEach(function (ubicacion) {
             const marcador = L.marker([
                 ubicacion.latitude,
                 ubicacion.longitude,

@@ -16,7 +16,7 @@
         <div class="row">
             @if (count($locals) === 0)
                 <div class="col-12">
-                    <p class="text-center">No se encontraron resultados</p>
+                    <p class="text-center">No se encontraron locales verificados</p>
                 </div>
             @else
                 @foreach ($locals as $local)
