@@ -6,10 +6,10 @@
     </x-slot>
 
     @if ($user->name == 'admin')
-        <div class=" text-center my-5">
+        <div class=" text-center my-3">
             <a href="#cervezas" class="btn btn-primary mx-2">Cervezas</a>
             <a href="#locales" class="btn btn-primary mx-2">Locales</a>
-            <input type="text" id="searchInput" placeholder="Buscar...">
+            <input class="my-2" type="text" id="searchInput" placeholder="Buscar...">
         </div>
         <div class="container" id="admin">
             <div class="row" id="locales">
