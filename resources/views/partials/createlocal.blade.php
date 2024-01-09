@@ -86,7 +86,7 @@
             </div>
 
             <div class="form-group mb-2">
-                <button type="submit" class="btn bg-success form-control">Crear</button>
+                <button type="submit" class="btn bg-success text-white form-control">Crear</button>
             </div>
         </form>
         @if (session('success'))
