@@ -59,20 +59,20 @@
                 <h5 class="text-uppercase mb-4">Social</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="https://facebook.com">Facebook</a>
+                        <a href="https://facebook.com" hidden>Facebook</a>
                     </li>
                     <li>
-                        <a href="https://instagram.com">Instagram</a>
+                        <a href="https://www.instagram.com/beerfinder.es">Instagram</a>
                     </li>
                     <li>
-                        <a href="https://x.com">X</a>
+                        <a href="https://x.com" hidden>X</a>
                     </li>
                     <li>
-                        <a href="https://tiktok.com">TikTok</a>
+                        <a href="https://tiktok.com" hidden>TikTok</a>
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-6 col-md-12 mb-4">
+            <div class="col-lg-6 col-md-12 mb-4" hidden>
                 <h5 class="text-uppercase mb-4">Suscribete a nuestra newsletter</h5>
                 <form class="d-flex justify-content-center">
                     <div class="input-group mb-3">

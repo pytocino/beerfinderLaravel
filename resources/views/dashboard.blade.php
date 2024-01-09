@@ -16,7 +16,7 @@
                 <h2 class="h2 text-center">Locales</h2>
                 @include('partials.createlocal')
                 @foreach ($locales as $local)
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="card p-3 m-3">
                             <div class="h3 mb-3 d-flex align-items-center">
                                 <span>{{ $local->name }}</span>
@@ -254,7 +254,7 @@
                 <h2 class="h2 text-center my-3">Cervezas</h2>
                 @include('partials.createbeer')
                 @foreach ($cerves as $cerve)
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="card p-3 m-3">
                             <div class="h3 mb-3 d-flex align-items-center">
                                 <span>{{ $cerve->name }}</span>

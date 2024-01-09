@@ -1,4 +1,4 @@
-<div class="col-12 col-md-3">
+<div class="col-12 col-md-6 col-lg-4 col-xl-3">
     <div class="card p-3 m-3">
         <div class="h3 mb-3 d-flex align-items-center">
             <span>AÑADIR LOCAL</span>

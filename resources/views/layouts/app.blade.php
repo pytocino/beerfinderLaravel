@@ -74,8 +74,8 @@
     <script>
         document.getElementById('searchInput').addEventListener('input', function() {
             let searchValue = this.value.toLowerCase();
-            let allLocales = document.querySelectorAll('#admin #locales .col-12.col-md-3');
-            let allCervezas = document.querySelectorAll('#admin #cervezas .col-12.col-md-3');
+            let allLocales = document.querySelectorAll('#admin #locales .col-12.col-md-6.col-lg-4.col-xl-3');
+            let allCervezas = document.querySelectorAll('#admin #cervezas .col-12.col-md-6.col-lg-4.col-xl-3');
 
             allLocales.forEach(function(item) {
                 let itemName = item.querySelector('.h3 span').textContent.toLowerCase();
