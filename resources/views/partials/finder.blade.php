@@ -6,8 +6,7 @@
         <select class="form-select my-2" id="name" name="name" required>
             <option class="text-center" value="" selected>Escoge una</option>
             @foreach ($beernames as $beername)
-                <option class="text-center" value="{{ $beername->name }}">{{ $beername->name }} -
-                    {{ $beername->graduation }} - {{ $beername->color }}</option>
+                <option class="text-center" value="{{ $beername->name }}">{{ $beername->name }}</option>
             @endforeach
         </select>
         <button type="reset" class="btn btn-danger fw-semibold my-2">Borrar</button>

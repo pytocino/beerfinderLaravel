@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $cerves = Beer::all();
         $locales = Local::all()->sortBy('name');
-        $beers = Beer::all();
+        $beers = Beer::all()->sortBy('name');
         $user = Auth::user();
         $locals = DB::table('locals')
             ->where('user_id', $user->id)
