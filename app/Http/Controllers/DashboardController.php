@@ -157,7 +157,7 @@ class DashboardController extends Controller
         $nuevoLocal->longitude = $request->input('longitude');
         $nuevoLocal->description = $request->input('description');
         $nuevoLocal->website = $request->input('website');
-        $nuevoLocal->city = $request->input('ciudad');
+        $nuevoLocal->city = $request->input('city');
         $nuevoLocal->region = $request->input('region');
         $nuevoLocal->verified = $request->input('verified');
         $nuevoLocal->user_id = $request->input('user_id');
