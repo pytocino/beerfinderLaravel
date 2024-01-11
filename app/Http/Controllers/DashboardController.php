@@ -178,7 +178,7 @@ class DashboardController extends Controller
         $nuevoLocal->longitude = $request->input('longitude');
         $nuevoLocal->description = $request->input('description');
         $nuevoLocal->website = $request->input('website');
-        $nuevoLocal->city = $request->input('ciudad');
+        $nuevoLocal->city = $request->input('city');
         $nuevoLocal->region = $request->input('region');
         $nuevoLocal->verified = $request->input('verified');
         $nuevoLocal->user_id = $request->input('user_id');
@@ -189,11 +189,23 @@ class DashboardController extends Controller
 
     public function deleteBeer($id)
     {
-        $beer = Beer::findOrFail($id);
+        try {
+            // Encuentra la cerveza por su ID
+            $beer = Beer::findOrFail($id);
+            // Verifica que el usuario autenticado sea el propietario de la cerveza
+            // Borra la cerveza
+            $beer->delete();
 
-        $beer->delete();
+            // Registra en el log
+            Log::info('Cerveza borrada: ' . $beer);
 
-        return redirect()->back()->with('success', 'Cerveza eliminada exitosamente');
+            // Redirige al usuario con un mensaje de éxito
+            return redirect()->route('dashboard')->with('success', 'Cerveza borrada exitosamente');
+        } catch (\Exception $e) {
+            // Manejo de errores
+            Log::error('Error al borrar la cerveza: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un error al borrar la cerveza. Por favor, intenta de nuevo.');
+        }
     }
 
     public function createBeer()

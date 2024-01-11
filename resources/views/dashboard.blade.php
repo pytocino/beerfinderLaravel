@@ -334,6 +334,18 @@
                                     <p>{{ $cerve->user_id }}</p>
                                 </div>
                             </form>
+                            <form action="{{ route('dashboard.cervezas.delete', ['id' => $cerve->id]) }}"
+                                method="post">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="id" value="{{ $cerve->id }}">
+
+                                <div class="form-group mb-2">
+                                    <button type="submit" class="btn bg-danger form-control text-white">Eliminar
+                                        Cerveza</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 @endforeach

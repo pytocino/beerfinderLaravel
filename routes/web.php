@@ -95,6 +95,8 @@ Route::post('/guardar_local', [DashboardController::class, 'storeLocal'])->name(
 Route::post('/dashboard/locales', [DashboardController::class, 'storeLocal2'])->name('guardar_local2');
 
 Route::get('/dashboard/cerveza/create', [DashboardController::class, 'createBeer'])->name('dashboard.cerveza.create');
+//delete cerveza
+Route::delete('/dashboard/cervezas/{id}/eliminar', [DashboardController::class, 'deleteBeer'])->name('dashboard.cervezas.delete');
 
 Route::post('/guardar_cerveza', [DashboardController::class, 'storeBeer'])->name('guardar_cerveza');
 
