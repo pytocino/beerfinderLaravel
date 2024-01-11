@@ -122,19 +122,6 @@ class DashboardController extends Controller
         return redirect()->back()->with('success', 'Cerveza actualizada exitosamente');
     }
 
-
-    public function deleteLocal($id)
-    {
-        // Encuentra el local por su ID
-        $local = Local::findOrFail($id);
-
-        // Elimina el local
-        $local->delete();
-
-        // Redirecciona o devuelve una respuesta apropiada (puede ser una redirección a la misma página)
-        return redirect()->back()->with('success', 'Local eliminado exitosamente');
-    }
-
     public function createLocal()
     {
         return view('partials.createlocal'); // name de la vista del formulario de creación de locales
@@ -205,6 +192,27 @@ class DashboardController extends Controller
             // Manejo de errores
             Log::error('Error al borrar la cerveza: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Hubo un error al borrar la cerveza. Por favor, intenta de nuevo.');
+        }
+    }
+
+    public function deleteLocal($id)
+    {
+        try {
+            // Encuentra el local por su ID
+            $local = Local::findOrFail($id);
+
+            // Borra el local
+            $local->delete();
+
+            // Registra en el log
+            Log::info('Local borrado: ' . $local);
+
+            // Redirige al usuario con un mensaje de éxito
+            return redirect()->route('dashboard')->with('success', 'Local borrado exitosamente');
+        } catch (\Exception $e) {
+            // Manejo de errores
+            Log::error('Error al borrar el local: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un error al borrar el local. Por favor, intenta de nuevo.');
         }
     }
 

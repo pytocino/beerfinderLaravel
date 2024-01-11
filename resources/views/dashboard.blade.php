@@ -139,6 +139,17 @@
                                         class="btn bg-success text-white form-control">Editar</button>
                                 </div>
                             </form>
+                            <form action="{{ route('dashboard.locals.delete', ['id' => $local->id]) }}"
+                                method="post">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="id" value="{{ $local->id }}">
+
+                                <div class="form-group mb-2">
+                                    <button type="submit" class="btn bg-danger form-control text-white">Eliminar
+                                    </button>
+                                </div>
+                            </form>
                             <div class="card-footer">
                                 {{ __('Cervezas') }}
                                 @foreach ($local->beers as $beer)
