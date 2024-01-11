@@ -182,7 +182,7 @@ class DashboardController extends Controller
             // Verifica que el usuario autenticado sea el propietario de la cerveza
             // Borra la cerveza
             $beer->delete();
-
+            $beer->locals()->detach();
             // Registra en el log
             Log::info('Cerveza borrada: ' . $beer);
 
