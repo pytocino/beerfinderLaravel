@@ -85,10 +85,15 @@
             </div>
         </div>
     </div>
+    <div class="text-left p-1">
+        <p class="text-muted">BEERFINDER ha sido disfrutado por {{ formatNumber($visitCount) }} personas. ¡Salud! 🍻
+        </p>
+    </div>
     <div class="text-center p-3 border-top border-white">
         <h3>© BEERFINDER - 2023</h3>
         <h3>Todos los derechos reservados.</h3>
     </div>
+
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
