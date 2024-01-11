@@ -38,6 +38,10 @@
                 </div>
             @endforeach
         </div>
+        <div class="text-left p-1">
+            <p class="text-muted">BEERFINDER ha sido disfrutado por {{ formatNumber($visitCount) }} personas. ¡Salud! 🍻
+            </p>
+        </div>
     </main>
     @include('partials.footer')
 </body>
