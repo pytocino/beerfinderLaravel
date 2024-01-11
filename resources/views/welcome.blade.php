@@ -39,7 +39,8 @@
             @endforeach
         </div>
         <div class="text-left p-1">
-            <p class="text-muted">BEERFINDER ha sido disfrutado por {{ formatNumber($visitCount) }} personas. ¡Salud! 🍻
+            <p class="text-muted">Gracias a BEERFINDER al menos {{ formatNumber($visitCount) }} personas han encontrado
+                la cerveza que estaban buscando ¡Salud! 🍻
             </p>
         </div>
     </main>

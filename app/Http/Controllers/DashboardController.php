@@ -200,6 +200,7 @@ class DashboardController extends Controller
         try {
             // Encuentra el local por su ID
             $local = Local::findOrFail($id);
+            $local->beers()->detach();
 
             // Borra el local
             $local->delete();
