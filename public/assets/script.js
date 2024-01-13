@@ -27,11 +27,20 @@ window.onload = function () {
             radius: 12,
         }).addTo(mapa);
 
+        let myIcon = L.icon({
+            iconUrl: "assets/marker.png",
+            iconRetinaUrl: "assets/marker2.png",
+            iconSize: [41, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            tooltipAnchor: [16, -28],
+        });
+
         locales.data.forEach(function (ubicacion) {
-            const marcador = L.marker([
-                ubicacion.latitude,
-                ubicacion.longitude,
-            ]).addTo(mapa);
+            const marcador = L.marker(
+                [ubicacion.latitude, ubicacion.longitude],
+                { icon: myIcon }
+            ).addTo(mapa);
             marcador.bindPopup(
                 `<a href="${ubicacion.address}" target="_blank">${ubicacion.name}</a>`
             );
