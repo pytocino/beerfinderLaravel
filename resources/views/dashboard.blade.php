@@ -12,6 +12,28 @@
             <input class="my-2" type="text" id="searchInput" placeholder="Buscar...">
         </div>
         <div class="container" id="admin">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <table class="table table-striped table-dark table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="col">ID</th class="col">
+                                <th class="col">Nombre</th class="col">
+                                <th class="col">Email</th class="col">
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $users->links() }}
+                </div>
+            </div>
             <div class="row" id="locales">
                 <h2 class="h2 text-center">Locales</h2>
                 @include('partials.createlocal')

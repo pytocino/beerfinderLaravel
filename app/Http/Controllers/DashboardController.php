@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Local;
 use App\Models\Beer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $users = User::paginate(5);
         $cerves = Beer::all();
         $locales = Local::all()->sortBy('name');
         $beers = Beer::all()->sortBy('name');
@@ -22,7 +24,7 @@ class DashboardController extends Controller
             ->get();
 
         $locals = Local::with('beers')->where('user_id', $user->id)->get();
-        return view('dashboard', ['locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves]);
+        return view('dashboard', ['locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves, 'users' => $users]);
     }
 
     public function agregarCerveza(Request $request)
