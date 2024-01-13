@@ -30,8 +30,8 @@ window.onload = function () {
         let myIcon = L.icon({
             iconUrl: "assets/marker.png",
             iconRetinaUrl: "assets/marker2.png",
-            iconSize: [41, 41],
-            iconAnchor: [12, 41],
+            iconSize: [101 / 4, 127 / 4],
+            iconAnchor: [40 / 4, 126 / 4],
             popupAnchor: [1, -34],
             tooltipAnchor: [16, -28],
         });
