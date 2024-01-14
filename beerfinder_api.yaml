@@ -32,123 +32,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/usersIndexResponse"
-  /users/login:
-    post:
-      tags:
-        - users
-      summary: Login de usuario
-      description: Login de usuario
-      operationId: users.login
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/usersLoginRequest"
-      responses:
-        "200":
-          description: Login correcto
+        "401":
+          description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/usersLoginResponse"
-        "422":
-          description: Error de validación
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UnprocessableEntity"
-  /users/{id}:
-    get:
-      tags:
-        - users
-      summary: Obtener un usuario
-      description: Obtener un usuario
-      operationId: users.show
-      parameters:
-        - name: id
-          in: path
-          description: ID del usuario
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Usuario obtenido correctamente
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/usersShowResponse"
-        "404":
-          description: Usuario no encontrado
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
-  /users/{id}/update:
-    put:
-      tags:
-        - users
-      summary: Actualizar un usuario
-      description: Actualizar un usuario
-      operationId: users.update
-      parameters:
-        - name: id
-          in: path
-          description: ID del usuario
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/usersUpdateRequest"
-      responses:
-        "200":
-          description: Usuario actualizado correctamente
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/usersUpdateResponse"
-        "404":
-          description: Usuario no encontrado
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
-        "422":
-          description: Error de validación
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UnprocessableEntity"
-  /users/{id}/delete:
-    delete:
-      tags:
-        - users
-      summary: Eliminar un usuario
-      description: Eliminar un usuario
-      operationId: users.delete
-      parameters:
-        - name: id
-          in: path
-          description: ID del usuario
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Usuario eliminado correctamente
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/usersDeleteResponse"
-        "404":
-          description: Usuario no encontrado
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
+                $ref: "#/components/schemas/ApiResponse"
   /beers:
     get:
       tags:
@@ -162,34 +51,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BeersIndexResponse"
-  /beers/{id}:
-    get:
-      tags:
-        - beers
-      summary: Obtener una beer
-      description: Obtener una beer
-      operationId: beers.show
-      parameters:
-        - name: id
-          in: path
-          description: ID de la beer
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Beer obtenida correctamente
+                $ref: "#/components/schemas/beersIndexResponse"
+        "401":
+          description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BeersShowResponse"
-        "404":
-          description: Beer no encontrada
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
+                $ref: "#/components/schemas/ApiResponse"
   /locals:
     get:
       tags:
@@ -203,34 +71,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LocalsIndexResponse"
-  /locals/{id}:
-    get:
-      tags:
-        - locals
-      summary: Obtener un local
-      description: Obtener un local
-      operationId: locals.show
-      parameters:
-        - name: id
-          in: path
-          description: ID del local
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Local obtenido correctamente
+                $ref: "#/components/schemas/localsIndexResponse"
+        "401":
+          description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LocalsShowResponse"
-        "404":
-          description: Local no encontrado
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
+                $ref: "#/components/schemas/ApiResponse"
   /beerlocals:
     get:
       tags:
@@ -244,34 +91,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BeerlocalsIndexResponse"
-  /beerlocals/{id}:
-    get:
-      tags:
-        - beerlocals
-      summary: Obtener un beerlocal
-      description: Obtener un beerlocal
-      operationId: beerlocals.show
-      parameters:
-        - name: id
-          in: path
-          description: ID del beerlocal
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Beerlocal obtenido correctamente
+                $ref: "#/components/schemas/beerlocalsIndexResponse"
+        "401":
+          description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BeerlocalsShowResponse"
-        "404":
-          description: Beerlocal no encontrado
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
+                $ref: "#/components/schemas/ApiResponse"
   /visits:
     get:
       tags:
@@ -285,37 +111,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VisitsIndexResponse"
-  /visits/{id}:
-    get:
-      tags:
-        - visits
-      summary: Obtener una visit
-      description: Obtener una visit
-      operationId: visits.show
-      parameters:
-        - name: id
-          in: path
-          description: ID de la visit
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Visit obtenida correctamente
+                $ref: "#/components/schemas/visitsIndexResponse"
+        "401":
+          description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VisitsShowResponse"
-        "404":
-          description: Visit no encontrada
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
+                $ref: "#/components/schemas/ApiResponse"
 components:
   schemas:
-    users:
+    User:
       type: object
       properties:
         id:
@@ -338,142 +143,142 @@ components:
         - created_at
         - updated_at
       xml:
-        name: users
-  Beer:
-    type: object
-    properties:
-      id:
-        type: integer
-      users_id:
-        type: integer
-      name:
-        type: string
-      color:
-        type: string
-      graduation:
-        type: float
-      taste:
-        type: string
-      type:
-        type: string
-      description:
-        type: string
-      image:
-        type: string
-      country:
-        type: string
-      region:
-        type: string
-      created_at:
-        type: string
-      updated_at:
-        type: string
-    required:
-      - id
-      - name
-      - users_id
-      - color
-      - graduation
-      - taste
-      - type
-      - description
-      - image
-      - country
-      - region
-      - created_at
-      - updated_at
-    xml:
-      name: Beers
-  Local:
-    type: object
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      users_id:
-        type: integer
-      type:
-        type: string
-      description:
-        type: string
-      email:
-        type: string
-      phone:
-        type: string
-      address:
-        type: string
-      latitude:
-        type: string
-      longitude:
-        type: string
-      city:
-        type: string
-      region:
-        type: string
-      website:
-        type: string
-      image:
-        type: string
-      verified:
-        type: boolean
-      created_at:
-        type: string
-      updated_at:
-        type: string
-    required:
-      - id
-      - name
-      - users_id
-      - type
-      - description
-      - email
-      - phone
-      - address
-      - latitude
-      - longitude
-      - city
-      - region
-      - website
-      - image
-      - verified
-      - created_at
-      - updated_at
-    xml:
-      name: Locals
-  Beerlocal:
-    type: object
-    properties:
-      id:
-        type: integer
-      beer_id:
-        type: integer
-      local_id:
-        type: integer
-      created_at:
-        type: string
-      updated_at:
-        type: string
-    required:
-      - id
-      - beer_id
-      - local_id
-      - created_at
-      - updated_at
-    xml:
-      name: Beerlocals
-  Visit:
-    type: object
-    properties:
-      id:
-        type: integer
-      count:
-        type: integer
-    required:
-      - id
-      - count
-    xml:
-      name: Visits
+        name: userss
+    Beer:
+      type: object
+      properties:
+        id:
+          type: integer
+        users_id:
+          type: integer
+        name:
+          type: string
+        color:
+          type: string
+        graduation:
+          type: float
+        taste:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+      required:
+        - id
+        - name
+        - users_id
+        - color
+        - graduation
+        - taste
+        - type
+        - description
+        - image
+        - country
+        - region
+        - created_at
+        - updated_at
+      xml:
+        name: Beers
+    Local:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        users_id:
+          type: integer
+        type:
+          type: string
+        description:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        city:
+          type: string
+        region:
+          type: string
+        website:
+          type: string
+        image:
+          type: string
+        verified:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+      required:
+        - id
+        - name
+        - users_id
+        - type
+        - description
+        - email
+        - phone
+        - address
+        - latitude
+        - longitude
+        - city
+        - region
+        - website
+        - image
+        - verified
+        - created_at
+        - updated_at
+      xml:
+        name: Locals
+    Beerlocal:
+      type: object
+      properties:
+        id:
+          type: integer
+        beer_id:
+          type: integer
+        local_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+      required:
+        - id
+        - beer_id
+        - local_id
+        - created_at
+        - updated_at
+      xml:
+        name: Beerlocals
+    Visit:
+      type: object
+      properties:
+        id:
+          type: integer
+        count:
+          type: integer
+      required:
+        - id
+        - count
+      xml:
+        name: Visits
   ApiResponse:
     type: object
     properties:
