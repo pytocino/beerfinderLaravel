@@ -1,9 +1,9 @@
-openapi: 3.1.0
+openapi: 3.0.1
 info:
   title: BEERFINDER - OpenAPI 3.0
   version: 1.0.11
 servers:
-  - url: http://beerfinder.test/api/records
+  - url: http://beerfinder.test/api/records/
     variables: {}
     description: Entorno React
 tags:
@@ -20,29 +20,19 @@ tags:
 paths:
   /user:
     post:
-      tags:
-        - user
-      summary: Crear un usuario
-      description: Crear un usuario
-      operationId: user.store
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserStoreRequest"
-      responses:
-        "201":
-          description: Usuario creado correctamente
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserStoreResponse"
-        "422":
-          description: Error de validación
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UnprocessableEntity"
+      get:
+        tags:
+          - user
+        summary: Obtener todos los usuarios
+        description: Obtener todos los usuarios
+        operationId: user.index
+        responses:
+          "200":
+            description: Usuarios obtenidos correctamente
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/UserIndexResponse"
   /user/login:
     post:
       tags:
