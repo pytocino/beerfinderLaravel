@@ -7,7 +7,7 @@ servers:
     variables: {}
     description: Entorno React
 tags:
-  - name: user
+  - name: userss
     description: Operaciones con los usuarios
   - name: beers
     description: Operaciones con las beers
@@ -18,39 +18,39 @@ tags:
   - name: visits
     description: Operaciones con las visits
 paths:
-  /user:
+  /users:
     get:
       tags:
-        - user
+        - users
       summary: Obtener todos los usuarios
       description: Obtener todos los usuarios
-      operationId: user.index
+      operationId: users.index
       responses:
         "200":
           description: Usuarios obtenidos correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserIndexResponse"
-  /user/login:
+                $ref: "#/components/schemas/usersIndexResponse"
+  /users/login:
     post:
       tags:
-        - user
+        - users
       summary: Login de usuario
       description: Login de usuario
-      operationId: user.login
+      operationId: users.login
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserLoginRequest"
+              $ref: "#/components/schemas/usersLoginRequest"
       responses:
         "200":
           description: Login correcto
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserLoginResponse"
+                $ref: "#/components/schemas/usersLoginResponse"
         "422":
           description: Error de validación
           content:
@@ -60,10 +60,10 @@ paths:
   /users/{id}:
     get:
       tags:
-        - user
+        - users
       summary: Obtener un usuario
       description: Obtener un usuario
-      operationId: user.show
+      operationId: users.show
       parameters:
         - name: id
           in: path
@@ -77,20 +77,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserShowResponse"
+                $ref: "#/components/schemas/usersShowResponse"
         "404":
           description: Usuario no encontrado
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/NotFound"
-  /user/{id}/update:
+  /users/{id}/update:
     put:
       tags:
-        - user
+        - users
       summary: Actualizar un usuario
       description: Actualizar un usuario
-      operationId: user.update
+      operationId: users.update
       parameters:
         - name: id
           in: path
@@ -102,14 +102,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserUpdateRequest"
+              $ref: "#/components/schemas/usersUpdateRequest"
       responses:
         "200":
           description: Usuario actualizado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserUpdateResponse"
+                $ref: "#/components/schemas/usersUpdateResponse"
         "404":
           description: Usuario no encontrado
           content:
@@ -122,13 +122,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UnprocessableEntity"
-  /user/{id}/delete:
+  /users/{id}/delete:
     delete:
       tags:
-        - user
+        - users
       summary: Eliminar un usuario
       description: Eliminar un usuario
-      operationId: user.delete
+      operationId: users.delete
       parameters:
         - name: id
           in: path
@@ -142,7 +142,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDeleteResponse"
+                $ref: "#/components/schemas/usersDeleteResponse"
         "404":
           description: Usuario no encontrado
           content:
@@ -315,7 +315,7 @@ paths:
                 $ref: "#/components/schemas/NotFound"
 components:
   schemas:
-    User:
+    users:
       type: object
       properties:
         id:
@@ -338,13 +338,13 @@ components:
         - created_at
         - updated_at
       xml:
-        name: Users
+        name: userss
   Beer:
     type: object
     properties:
       id:
         type: integer
-      user_id:
+      users_id:
         type: integer
       name:
         type: string
@@ -371,7 +371,7 @@ components:
     required:
       - id
       - name
-      - user_id
+      - users_id
       - color
       - graduation
       - taste
@@ -391,7 +391,7 @@ components:
         type: integer
       name:
         type: string
-      user_id:
+      users_id:
         type: integer
       type:
         type: string
@@ -424,7 +424,7 @@ components:
     required:
       - id
       - name
-      - user_id
+      - users_id
       - type
       - description
       - email
@@ -490,11 +490,11 @@ components:
     xml:
       name: ApiResponses
     requestBodies:
-      User:
+      users:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: "#/components/schemas/users"
       Beer:
         content:
           application/json:
