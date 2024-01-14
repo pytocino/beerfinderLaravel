@@ -295,7 +295,7 @@ components:
     xml:
       name: ApiResponses
     requestBodies:
-      users:
+      User:
         content:
           application/json:
             schema:
