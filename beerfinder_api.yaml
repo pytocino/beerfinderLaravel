@@ -19,20 +19,19 @@ tags:
     description: Operaciones con las visits
 paths:
   /user:
-    post:
-      get:
-        tags:
-          - user
-        summary: Obtener todos los usuarios
-        description: Obtener todos los usuarios
-        operationId: user.index
-        responses:
-          "200":
-            description: Usuarios obtenidos correctamente
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/UserIndexResponse"
+    get:
+      tags:
+        - user
+      summary: Obtener todos los usuarios
+      description: Obtener todos los usuarios
+      operationId: user.index
+      responses:
+        "200":
+          description: Usuarios obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserIndexResponse"
   /user/login:
     post:
       tags:
