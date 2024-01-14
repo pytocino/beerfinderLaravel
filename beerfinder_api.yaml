@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: BEERFINDER - OpenAPI 3.0
   version: 1.0.11
@@ -18,691 +18,515 @@ tags:
   - name: visits
     description: Operaciones con las visits
 paths:
-  /users:
-    get:
-      tags:
-        - user
-      summary: Devuelve todos los usuarios
-      description: Devuelve todos los usuarios
-      operationId: getUsers
-      parameters:
-        - name: size
-          in: query
-          description: Número máximo de usuarios a devolver
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: page
-          in: query
-          description: Número de usuarios a saltar
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        "200":
-          description: Operación exitosa
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: user not found
+  /user:
     post:
       tags:
         - user
-      summary: Añade un nuevo usuario
-      description: Añade un nuevo usuario
-      operationId: addUser
+      summary: Crear un usuario
+      description: Crear un usuario
+      operationId: user.store
       requestBody:
-        description: Crea un nuevo Usuario
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
-          application/xml:
-            schema:
-              $ref: "#/components/schemas/User"
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: "#/components/schemas/User"
-        required: true
+              $ref: "#/components/schemas/UserStoreRequest"
       responses:
-        "200":
-          description: Operación exitosa
+        "201":
+          description: Usuario creado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-            application/xml:
+                $ref: "#/components/schemas/UserStoreResponse"
+        "422":
+          description: Error de validación
+          content:
+            application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        "405":
-          description: Invalid input
-  /users/{id}:
+                $ref: "#/components/schemas/UnprocessableEntity"
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Login de usuario
+      description: Login de usuario
+      operationId: user.login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLoginRequest"
+      responses:
+        "200":
+          description: Login correcto
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserLoginResponse"
+        "422":
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntity"
+  /user/{id}:
     get:
       tags:
         - user
-      summary: Encuentra un usuario según su ID
-      description: Devuelve un único usuario
-      operationId: getUserById
+      summary: Obtener un usuario
+      description: Obtener un usuario
+      operationId: user.show
       parameters:
         - name: id
           in: path
-          description: ID del usuario a devolver
+          description: ID del usuario
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         "200":
-          description: Operación exitosa
+          description: Usuario obtenido correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid ID supplied
+                $ref: "#/components/schemas/UserShowResponse"
         "404":
-          description: user not found
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+  /user/{id}/update:
     put:
       tags:
         - user
-      summary: Actualiza un usuario con los datos del formulario
-      description: ""
-      operationId: updateUserWithForm
+      summary: Actualizar un usuario
+      description: Actualizar un usuario
+      operationId: user.update
       parameters:
         - name: id
           in: path
-          description: ID del usuario a actualizar
+          description: ID del usuario
           required: true
           schema:
             type: integer
-            format: int64
       requestBody:
-        description: Crea un nuevo Usuario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdateRequest"
+      responses:
+        "200":
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserUpdateResponse"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "422":
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntity"
+  /user/{id}/delete:
+    delete:
+      tags:
+        - user
+      summary: Eliminar un usuario
+      description: Eliminar un usuario
+      operationId: user.delete
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Usuario eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDeleteResponse"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+  /beers:
+    get:
+      tags:
+        - beers
+      summary: Obtener todas las beers
+      description: Obtener todas las beers
+      operationId: beers.index
+      responses:
+        "200":
+          description: Beers obtenidas correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeersIndexResponse"
+  /beers/{id}:
+    get:
+      tags:
+        - beers
+      summary: Obtener una beer
+      description: Obtener una beer
+      operationId: beers.show
+      parameters:
+        - name: id
+          in: path
+          description: ID de la beer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Beer obtenida correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeersShowResponse"
+        "404":
+          description: Beer no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+  /locals:
+    get:
+      tags:
+        - locals
+      summary: Obtener todos los locals
+      description: Obtener todos los locals
+      operationId: locals.index
+      responses:
+        "200":
+          description: Locals obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocalsIndexResponse"
+  /locals/{id}:
+    get:
+      tags:
+        - locals
+      summary: Obtener un local
+      description: Obtener un local
+      operationId: locals.show
+      parameters:
+        - name: id
+          in: path
+          description: ID del local
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Local obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocalsShowResponse"
+        "404":
+          description: Local no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+  /beerlocals:
+    get:
+      tags:
+        - beerlocals
+      summary: Obtener todos los beerlocals
+      description: Obtener todos los beerlocals
+      operationId: beerlocals.index
+      responses:
+        "200":
+          description: Beerlocals obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeerlocalsIndexResponse"
+  /beerlocals/{id}:
+    get:
+      tags:
+        - beerlocals
+      summary: Obtener un beerlocal
+      description: Obtener un beerlocal
+      operationId: beerlocals.show
+      parameters:
+        - name: id
+          in: path
+          description: ID del beerlocal
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Beerlocal obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeerlocalsShowResponse"
+        "404":
+          description: Beerlocal no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+  /visits:
+    get:
+      tags:
+        - visits
+      summary: Obtener todas las visits
+      description: Obtener todas las visits
+      operationId: visits.index
+      responses:
+        "200":
+          description: Visits obtenidas correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitsIndexResponse"
+  /visits/{id}:
+    get:
+      tags:
+        - visits
+      summary: Obtener una visit
+      description: Obtener una visit
+      operationId: visits.show
+      parameters:
+        - name: id
+          in: path
+          description: ID de la visit
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Visit obtenida correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitsShowResponse"
+        "404":
+          description: Visit no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        email_verified_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+      required:
+        - id
+        - name
+        - email
+        - email_verified_at
+        - created_at
+        - updated_at
+      xml:
+        name: Users
+  Beer:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      name:
+        type: string
+      color:
+        type: string
+      graduation:
+        type: float
+      taste:
+        type: string
+      type:
+        type: string
+      description:
+        type: string
+      image:
+        type: string
+      country:
+        type: string
+      region:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+    required:
+      - id
+      - name
+      - user_id
+      - color
+      - graduation
+      - taste
+      - type
+      - description
+      - image
+      - country
+      - region
+      - created_at
+      - updated_at
+    xml:
+      name: Beers
+  Local:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      user_id:
+        type: integer
+      type:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      address:
+        type: string
+      latitude:
+        type: string
+      longitude:
+        type: string
+      city:
+        type: string
+      region:
+        type: string
+      website:
+        type: string
+      image:
+        type: string
+      verified:
+        type: boolean
+      created_at:
+        type: string
+      updated_at:
+        type: string
+    required:
+      - id
+      - name
+      - user_id
+      - type
+      - description
+      - email
+      - phone
+      - address
+      - latitude
+      - longitude
+      - city
+      - region
+      - website
+      - image
+      - verified
+      - created_at
+      - updated_at
+    xml:
+      name: Locals
+  Beerlocal:
+    type: object
+    properties:
+      id:
+        type: integer
+      beer_id:
+        type: integer
+      local_id:
+        type: integer
+      created_at:
+        type: string
+      updated_at:
+        type: string
+    required:
+      - id
+      - beer_id
+      - local_id
+      - created_at
+      - updated_at
+    xml:
+      name: Beerlocals
+  Visit:
+    type: object
+    properties:
+      id:
+        type: integer
+      count:
+        type: integer
+    required:
+      - id
+      - count
+    xml:
+      name: Visits
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+      type:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - type
+      - message
+    xml:
+      name: ApiResponses
+    requestBodies:
+      User:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/User"
-          application/xml:
+      Beer:
+        content:
+          application/json:
             schema:
-              $ref: "#/components/schemas/User"
-          application/x-www-form-urlencoded:
+              $ref: "#/components/schemas/Beer"
+      Local:
+        content:
+          application/json:
             schema:
-              $ref: "#/components/schemas/User"
-        required: true
-      responses:
-        "405":
-          description: Invalid input
-    delete:
-      tags:
-        - user
-      summary: Borra un usuario
-      description: Borra un usuario
-      operationId: deleteUser
-      parameters:
-        - name: id
-          in: path
-          description: id del usuario a borrar
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        "400":
-          description: Invalid user value
-  /beers:
-    get:
-      tags:
-        - beer
-      summary: Devuelve todas las cervezas
-      description: Devuelve todas las cervezas
-      operationId: getBeers
-      parameters:
-        - name: size
-          in: query
-          description: Número máximo de cervezas a devolver
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: page
-          in: query
-          description: Número de cervezas a saltar
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        "200":
-          description: Operación exitosa
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Beer"
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Beer"
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: beer not found
-      post:
-        tags:
-          - beer
-        summary: Añade una nueva cerveza
-        description: Añade una nueva cerveza
-        operationId: addBeer
-        requestBody:
-          description: Crea una nueva Cerveza
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Beer"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Beer"
-            application/x-www-form-urlencoded:
-              schema:
-                $ref: "#/components/schemas/Beer"
-          required: true
-        responses:
-          "200":
-            description: Operación exitosa
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Beer"
-              application/xml:
-                schema:
-                  $ref: "#/components/schemas/Beer"
-          "405":
-            description: Invalid input
-      /beers/{id}:
-          get:
-            tags:
-              - beer
-            summary: Encuentra una cerveza según su ID
-            description: Devuelve una única cerveza
-            operationId: getBeerById
-            parameters:
-              - name: id
-                in: path
-                description: ID de la cerveza a devolver
-                required: true
-                schema:
-                  type: integer
-                  format: int64
-            responses:
-              "200":
-                description: Operación exitosa
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/Beer"
-                  application/xml:
-                    schema:
-                      $ref: "#/components/schemas/Beer"
-              "400":
-                description: Invalid ID supplied
-              "404":
-                description: beer not found
-      put:
-        tags:
-          - beer
-        summary: Actualiza una cerveza con los datos del formulario
-        description: ""
-        operationId: updateBeerWithForm
-        parameters:
-          - name: id
-            in: path
-            description: ID de la cerveza a actualizar
-            required: true
+              $ref: "#/components/schemas/Local"
+      Beerlocal:
+        content:
+          application/json:
             schema:
-              type: integer
-              format: int64
-        requestBody:
-          description: Crea una nueva Cerveza
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Beer"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Beer"
-            application/x-www-form-urlencoded:
-              schema:
-                $ref: "#/components/schemas/Beer"
-          required: true
-        responses:
-          "405":
-            description: Invalid input
-      delete:
-        tags:
-          - beer
-        summary: Borra una cerveza
-        description: Borra una cerveza
-        operationId: deleteBeer
-        parameters:
-          - name: id
-            in: path
-            description: id de la cerveza a borrar
-            required: true
+              $ref: "#/components/schemas/Beerlocal"
+      Visit:
+        content:
+          application/json:
             schema:
-              type: integer
-              format: int64
-        responses:
-          "400":
-            description: Invalid beer value
-/locals:
-      get:
-        tags:
-          - local
-        summary: Devuelve todos los locales
-        description: Devuelve todos los locales
-        operationId: getLocals
-        parameters:
-          - name: size
-            in: query
-            description: Número máximo de locales a devolver
-            required: false
-            schema:
-              type: integer
-              format: int32
-          - name: page
-            in: query
-            description: Número de locales a saltar
-            required: false
-            schema:
-              type: integer
-              format: int32
-        responses:
-          "200":
-            description: Operación exitosa
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Local"
-              application/xml:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Local"
-          "400":
-            description: Invalid ID supplied
-          openapi: 3.1.0
-          paths:
-            /locals/{id}:
-              get:
-                tags:
-                  - local
-                summary: Encuentra un local según su ID
-                description: Devuelve un único local
-                operationId: getLocalById
-                parameters:
-                  - name: id
-                    in: path
-                    description: ID del local a devolver
-                    required: true
-                    schema:
-                      type: integer
-                      format: int64
-                responses:
-                  "200":
-                    description: Operación exitosa
-                    content:
-                      application/json:
-                        schema:
-                          $ref: "#/components/schemas/Local"
-                      application/xml:
-                        schema:
-                          $ref: "#/components/schemas/Local"
-                  "400":
-                    description: Invalid ID supplied
-                  "404":
-                    description: local not found
-              put:
-                tags:
-                  - local
-                summary: Actualiza un local con los datos del formulario
-                description: ""
-                operationId: updateLocalWithForm
-                parameters:
-                  - name: id
-                    in: path
-                    description: ID del local a actualizar
-                    required: true
-                    schema:
-                      type: integer
-                      format: int64
-                requestBody:
-                  description: Crea un nuevo Local
-                  content:
-                    application/json:
-                      schema:
-                        $ref: "#/components/schemas/Local"
-                    application/xml:
-                      schema:
-                        $ref: "#/components/schemas/Local"
-                    application/x-www-form-urlencoded:
-                      schema:
-                        $ref: "#/components/schemas/Local"
-                  required: true
-                responses:
-                  "405":
-                    description: Invalid input
-              delete:
-                tags:
-                  - local
-                summary: Borra un local
-                description: Borra un local
-                operationId: deleteLocal
-                parameters:
-                  - name: id
-                    in: path
-                    description: id del local a borrar
-                    required: true
-                    schema:
-                      type: integer
-                      format: int64
-                responses:
-                  "400":
-                    description: Invalid local value
-
-            /beerlocals/{id}:
-              get:
-                tags:
-                  - beerlocal
-                summary: Encuentra un beerlocal según su ID
-                description: Devuelve un único beerlocal
-                operationId: getBeerLocalById
-                parameters:
-                  - name: id
-                    in: path
-                    description: ID del beerlocal a devolver
-                    required: true
-                    schema:
-                      type: integer
-                      format: int64
-                responses:
-                  "200":
-                    description: Operación exitosa
-                    content:
-                      application/json:
-                        schema:
-                          $ref: "#/components/schemas/BeerLocal"
-                      application/xml:
-                        schema:
-                          $ref: "#/components/schemas/BeerLocal"
-                  "400":
-                    description: Invalid ID supplied
-                  "404":
-                    description: beerlocal not found
-              put:
-                tags:
-                  - beerlocal
-                summary: Actualiza un beerlocal con los datos del formulario
-                description: ""
-                operationId: updateBeerLocalWithForm
-                parameters:
-                  - name: id
-                    in: path
-                    description: ID del beerlocal a actualizar
-                    required: true
-                    schema:
-                      type: integer
-                      format: int64
-                requestBody:
-                  description: Crea un nuevo BeerLocal
-                  content:
-                    application/json:
-                      schema:
-                        $ref: "#/components/schemas/BeerLocal"
-                    application/xml:
-                      schema:
-                        $ref: "#/components/schemas/BeerLocal"
-                    application/x-www-form-urlencoded:
-                      schema:
-                        $ref: "#/components/schemas/BeerLocal"
-                  required: true
-                responses:
-                  "405":
-                    description: Invalid input
-              delete:
-                tags:
-                  - beerlocal
-                summary: Borra un beerlocal
-                description: Borra un beerlocal
-                operationId: deleteBeerLocal
-                parameters:
-                  - name: id
-                    in: path
-                    description: id del beerlocal a borrar
-                    required: true
-                    schema:
-                      type: integer
-                      format: int64
-                responses:
-                  "400":
-                    description: Invalid beerlocal value
-
-          /beerlocals:
-            get:
-              tags:
-                - beerlocal
-              summary: Devuelve todos los beerlocals
-              description: Devuelve todos los beerlocals
-              operationId: getBeerLocals
-              parameters:
-                - name: size
-                  in: query
-                  description: Número máximo de beerlocals a devolver
-                  required: false
-                  schema:
-                    type: integer
-                    format: int32
-                - name: page
-                  in: query
-                  description: Número de beerlocals a saltar
-                  required: false
-                  schema:
-                    type: integer
-                    format: int32
-              responses:
-                "200":
-                  description: Operación exitosa
-                  content:
-                    application/json:
-                      schema:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/BeerLocal"
-                    application/xml:
-                      schema:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/BeerLocal"
-                "400":
-                  description: Invalid ID supplied
-                "404":
-                  description: beerlocal not found
-              post:
-                tags:
-                  - beerlocal
-                summary: Añade un nuevo beerlocal
-                description: Añade un nuevo beerlocal
-                operationId: addBeerLocal
-                requestBody:
-                  description: Crea un nuevo BeerLocal
-                  content:
-                    application/json:
-                      schema:
-                        $ref: "#/components/schemas/BeerLocal"
-                    application/xml:
-                      schema:
-                        $ref: "#/components/schemas/BeerLocal"
-                    application/x-www-form-urlencoded:
-                      schema:
-                        $ref: "#/components/schemas/BeerLocal"
-                  required: true
-                responses:
-                  "200":
-                    description: Operación exitosa
-                    content:
-                      application/json:
-                        schema:
-                          $ref: "#/components/schemas/BeerLocal"
-                      application/xml:
-                        schema:
-                          $ref: "#/components/schemas/BeerLocal"
-                  "405":
-                    description: Invalid input
-
-          components:
-            schemas:
-              User:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 10
-                  firstName:
-                    type: string
-                    example: John
-                  lastName:
-                    type: string
-                    example: James
-                  email:
-                    type: string
-                    example: john@email.com
-                  password:
-                    type: string
-                    example: "12345"
-                  linkedIn:
-                    type: string
-                    example: linkedinProfile
-                xml:
-                  name: user
-              BeerLocal:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 10
-                  beer_id:
-                    $ref: "#/components/schemas/Beer"
-                    description: Cerveza asociada al local
-                    example: 10
-                  local_id:
-                    $ref: "#/components/schemas/Local"
-                    description: Local asociado a la cerveza
-                    example: 20
-                  rating:
-                    type: number
-                    format: double
-                    description: Calificación del local para la cerveza
-                    example: 4.5
-                xml:
-                  name: beerlocal
-              Local:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 20
-                  name:
-                    type: string
-                    description: Nombre del local
-                    example: Bar de Tapas
-                  location:
-                    type: string
-                    description: Ubicación del local
-                    example: Calle Principal, Ciudad
-                xml:
-                  name: local
-              Beer:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 10
-                  name:
-                    type: string
-                    description: Nombre de la cerveza
-                    example: Lager Especial
-                  type:
-                    type: string
-                    description: Tipo de cerveza
-                    example: Lager
-                  alcohol_content:
-                    type: number
-                    format: double
-                    description: Contenido de alcohol de la cerveza
-                    example: 5.0
-                xml:
-                  name: beer
-            requestBodies:
-              User:
-                description: User object that needs to be added to the store
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/User"
-                  application/xml:
-                    schema:
-                      $ref: "#/components/schemas/User"
-              BeerLocal:
-                description: BeerLocal object that needs to be added to the store
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/BeerLocal"
-                  application/xml:
-                    schema:
-                      $ref: "#/components/schemas/BeerLocal"
-              Local:
-                description: Local object that needs to be added to the store
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/Local"
-                  application/xml:
-                    schema:
-                      $ref: "#/components/schemas/Local"
-              Beer:
-                description: Beer object that needs to be added to the store
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/Beer"
-                  application/xml:
-                    schema:
-                      $ref: "#/components/schemas/Beer"
-            securitySchemes:
-              basic_auth:
-                type: http
-                scheme: basic
+              $ref: "#/components/schemas/Visit"
+    securitySchemes:
+      basic_auth:
+        type: http
+        scheme: basic
