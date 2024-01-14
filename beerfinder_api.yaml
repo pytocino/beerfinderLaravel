@@ -1,8 +1,11 @@
+openapi: 3.0.1
+info:
+  title: MarcaPersonalFP - OpenAPI 3.0
+  version: 1.0.11
 servers:
   - url: http://marcapersonalFP.test/api/records
     variables: {}
     description: Entorno React
-
 tags:
   - name: user
     description: Operaciones con los usuarios
@@ -14,7 +17,6 @@ tags:
     description: Operaciones con los beerlocals
   - name: visits
     description: Operaciones con las visits
-
 paths:
   /users:
     get:
