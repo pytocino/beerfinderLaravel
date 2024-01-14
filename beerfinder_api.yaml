@@ -1,0 +1,739 @@
+servers:
+  - url: http://marcapersonalFP.test/api/records
+    variables: {}
+    description: Entorno React
+tags:
+  - name: user
+    description: Operaciones con los usuarios
+  - name: beers
+    description: Operaciones con las beers
+  - name: locals
+    description: Operaciones con los locals
+  - name: beerlocals
+    description: Operaciones con los beerlocals
+  - name: visits
+    description: Operaciones con las visits
+  paths:
+    /users:
+      get:
+        tags:
+          - user
+        summary: Devuelve todos los usuarios
+        description: Devuelve todos los usuarios
+        operationId: getUsers
+        parameters:
+          - name: size
+            in: query
+            description: Número máximo de usuarios a devolver
+            required: false
+            schema:
+              type: integer
+              format: int32
+          - name: page
+            in: query
+            description: Número de usuarios a saltar
+            required: false
+            schema:
+              type: integer
+              format: int32
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: user not found
+      post:
+        tags:
+          - user
+        summary: Añade un nuevo usuario
+        description: Añade un nuevo usuario
+        operationId: addUser
+        requestBody:
+          description: Crea un nuevo Usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/User'
+          required: true
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/User'
+          '405':
+            description: Invalid input
+    /users/{id}:
+      get:
+        tags:
+          - user
+        summary: Encuentra un usuario según su ID
+        description: Devuelve un único usuario
+        operationId: getUserById
+        parameters:
+          - name: id
+            in: path
+            description: ID del usuario a devolver
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/User'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: user not found
+      put:
+        tags:
+          - user
+        summary: Actualiza un usuario con los datos del formulario
+        description: ''
+        operationId: updateUserWithForm
+        parameters:
+          - name: id
+            in: path
+            description: ID del usuario a actualizar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        requestBody:
+          description: Crea un nuevo Usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/User'
+          required: true
+        responses:
+          '405':
+            description: Invalid input
+      delete:
+        tags:
+          - user
+        summary: Borra un usuario
+        description: Borra un usuario
+        operationId: deleteUser
+        parameters:
+          - name: id
+            in: path
+            description: id del usuario a borrar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '400':
+            description: Invalid user value
+
+beers:
+  paths:
+    /beers:
+      get:
+        tags:
+          - beer
+        summary: Devuelve todas las cervezas
+        description: Devuelve todas las cervezas
+        operationId: getBeers
+        parameters:
+          - name: size
+            in: query
+            description: Número máximo de cervezas a devolver
+            required: false
+            schema:
+              type: integer
+              format: int32
+          - name: page
+            in: query
+            description: Número de cervezas a saltar
+            required: false
+            schema:
+              type: integer
+              format: int32
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Beer'
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Beer'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: beer not found
+      post:
+        tags:
+          - beer
+        summary: Añade una nueva cerveza
+        description: Añade una nueva cerveza
+        operationId: addBeer
+        requestBody:
+          description: Crea una nueva Cerveza
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Beer'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Beer'
+          required: true
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Beer'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/Beer'
+          '405':
+            description: Invalid input
+    /beers/{id}:
+      get:
+        tags:
+          - beer
+        summary: Encuentra una cerveza según su ID
+        description: Devuelve una única cerveza
+        operationId: getBeerById
+        parameters:
+          - name: id
+            in: path
+            description: ID de la cerveza a devolver
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Beer'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/Beer'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: beer not found
+      put:
+        tags:
+          - beer
+        summary: Actualiza una cerveza con los datos del formulario
+        description: ''
+        operationId: updateBeerWithForm
+        parameters:
+          - name: id
+            in: path
+            description: ID de la cerveza a actualizar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        requestBody:
+          description: Crea una nueva Cerveza
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Beer'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Beer'
+          required: true
+        responses:
+          '405':
+            description: Invalid input
+      delete:
+        tags:
+          - beer
+        summary: Borra una cerveza
+        description: Borra una cerveza
+        operationId: deleteBeer
+        parameters:
+          - name: id
+            in: path
+            description: id de la cerveza a borrar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '400':
+            description: Invalid beer value
+locals:
+  paths:
+    /locals:
+      get:
+        tags:
+          - local
+        summary: Devuelve todos los locales
+        description: Devuelve todos los locales
+        operationId: getLocals
+        parameters:
+          - name: size
+            in: query
+            description: Número máximo de locales a devolver
+            required: false
+            schema:
+              type: integer
+              format: int32
+          - name: page
+            in: query
+            description: Número de locales a saltar
+            required: false
+            schema:
+              type: integer
+              format: int32
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Local'
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Local'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: local not found
+      post:
+        tags:
+          - local
+        summary: Añade un nuevo local
+        description: Añade un nuevo local
+        operationId: addLocal
+        requestBody:
+          description: Crea un nuevo Local
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Local'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Local'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Local'
+          required: true
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Local'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/Local'
+          '405':
+            description: Invalid input
+    /locals/{id}:
+      get:
+        tags:
+          - local
+        summary: Encuentra un local según su ID
+        description: Devuelve un único local
+        operationId: getLocalById
+        parameters:
+          - name: id
+            in: path
+            description: ID del local a devolver
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Local'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/Local'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: local not found
+      put:
+        tags:
+          - local
+        summary: Actualiza un local con los datos del formulario
+        description: ''
+        operationId: updateLocalWithForm
+        parameters:
+          - name: id
+            in: path
+            description: ID del local a actualizar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        requestBody:
+          description: Crea un nuevo Local
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Local'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Local'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Local'
+          required: true
+        responses:
+          '405':
+            description: Invalid input
+      delete:
+        tags:
+          - local
+        summary: Borra un local
+        description: Borra un local
+        operationId: deleteLocal
+        parameters:
+          - name: id
+            in: path
+            description: id del local a borrar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '400':
+            description: Invalid local value
+beerlocals:
+  paths:
+    /beerlocals:
+      get:
+        tags:
+          - beerlocal
+        summary: Devuelve todos los beerlocals
+        description: Devuelve todos los beerlocals
+        operationId: getBeerLocals
+        parameters:
+          - name: size
+            in: query
+            description: Número máximo de beerlocals a devolver
+            required: false
+            schema:
+              type: integer
+              format: int32
+          - name: page
+            in: query
+            description: Número de beerlocals a saltar
+            required: false
+            schema:
+              type: integer
+              format: int32
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BeerLocal'
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BeerLocal'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: beerlocal not found
+      post:
+        tags:
+          - beerlocal
+        summary: Añade un nuevo beerlocal
+        description: Añade un nuevo beerlocal
+        operationId: addBeerLocal
+        requestBody:
+          description: Crea un nuevo BeerLocal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeerLocal'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BeerLocal'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/BeerLocal'
+          required: true
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/BeerLocal'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/BeerLocal'
+          '405':
+            description: Invalid input
+    /beerlocals/{id}:
+      get:
+        tags:
+          - beerlocal
+        summary: Encuentra un beerlocal según su ID
+        description: Devuelve un único beerlocal
+        operationId: getBeerLocalById
+        parameters:
+          - name: id
+            in: path
+            description: ID del beerlocal a devolver
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '200':
+            description: Operación exitosa
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/BeerLocal'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/BeerLocal'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: beerlocal not found
+      put:
+        tags:
+          - beerlocal
+        summary: Actualiza un beerlocal con los datos del formulario
+        description: ''
+        operationId: updateBeerLocalWithForm
+        parameters:
+          - name: id
+            in: path
+            description: ID del beerlocal a actualizar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        requestBody:
+          description: Crea un nuevo BeerLocal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeerLocal'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BeerLocal'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/BeerLocal'
+          required: true
+        responses:
+          '405':
+            description: Invalid input
+      delete:
+        tags:
+          - beerlocal
+        summary: Borra un beerlocal
+        description: Borra un beerlocal
+        operationId: deleteBeerLocal
+        parameters:
+          - name: id
+            in: path
+            description: id del beerlocal a borrar
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '400':
+            description: Invalid beerlocal value
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+        linkedIn:
+          type: string
+          example: linkedinProfile
+      xml:
+        name: user
+    BeerLocal:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        beer_id:
+          $ref: '#/components/schemas/Beer'
+          description: Cerveza asociada al local
+          example: 10
+        local_id:
+          $ref: '#/components/schemas/Local'
+          description: Local asociado a la cerveza
+          example: 20
+        rating:
+          type: number
+          format: double
+          description: Calificación del local para la cerveza
+          example: 4.5
+      xml:
+        name: beerlocal
+    Local:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 20
+        name:
+          type: string
+          description: Nombre del local
+          example: Bar de Tapas
+        location:
+          type: string
+          description: Ubicación del local
+          example: Calle Principal, Ciudad
+      xml:
+        name: local
+    Beer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          description: Nombre de la cerveza
+          example: Lager Especial
+        type:
+          type: string
+          description: Tipo de cerveza
+          example: Lager
+        alcohol_content:
+          type: number
+          format: double
+          description: Contenido de alcohol de la cerveza
+          example: 5.0
+      xml:
+        name: beer
+  requestBodies:
+    User:
+      description: User object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/User'
+    BeerLocal:
+      description: BeerLocal object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BeerLocal'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/BeerLocal'
+    Local:
+      description: Local object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Local'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Local'
+    Beer:
+      description: Beer object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Beer'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Beer'
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
