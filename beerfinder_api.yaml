@@ -57,7 +57,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UnprocessableEntity"
-  /user/{id}:
+  /users/{id}:
     get:
       tags:
         - user
