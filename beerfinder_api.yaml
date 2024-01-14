@@ -1,9 +1,9 @@
 openapi: 3.0.1
 info:
-  title: MarcaPersonalFP - OpenAPI 3.0
+  title: BEERFINDER - OpenAPI 3.0
   version: 1.0.11
 servers:
-  - url: http://marcapersonalFP.test/api/records
+  - url: localhost/api/records
     variables: {}
     description: Entorno React
 tags:
