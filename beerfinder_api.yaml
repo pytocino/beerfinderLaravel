@@ -2,6 +2,7 @@ servers:
   - url: http://marcapersonalFP.test/api/records
     variables: {}
     description: Entorno React
+
 tags:
   - name: user
     description: Operaciones con los usuarios
@@ -13,55 +14,70 @@ tags:
     description: Operaciones con los beerlocals
   - name: visits
     description: Operaciones con las visits
-  paths:
-    /users:
-      get:
-        tags:
-          - user
-        summary: Devuelve todos los usuarios
-        description: Devuelve todos los usuarios
-        operationId: getUsers
-        parameters:
-          - name: size
-            in: query
-            description: Número máximo de usuarios a devolver
-            required: false
+
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      summary: Devuelve todos los usuarios
+      description: Devuelve todos los usuarios
+      operationId: getUsers
+      parameters:
+        - name: size
+          in: query
+          description: Número máximo de usuarios a devolver
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: Número de usuarios a saltar
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: user not found
+    post:
+      tags:
+        - user
+      summary: Añade un nuevo usuario
+      description: Añade un nuevo usuario
+      operationId: addUser
+      requestBody:
+        description: Crea un nuevo Usuario
+        content:
+          application/json:
             schema:
-              type: integer
-              format: int32
-          - name: page
-            in: query
-            description: Número de usuarios a saltar
-            required: false
+              $ref: '#/components/schemas/User'
+          application/xml:
             schema:
-              type: integer
-              format: int32
-        responses:
-          '200':
-            description: Operación exitosa
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/User'
-              application/xml:
-                schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/User'
-          '400':
-            description: Invalid ID supplied
-          '404':
-            description: user not found
-      post:
-        tags:
-          - user
-        summary: Añade un nuevo usuario
-        description: Añade un nuevo usuario
-        operationId: addUser
-        requestBody:
-          description: Crea un nuevo Usuario
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -69,67 +85,26 @@ tags:
             application/xml:
               schema:
                 $ref: '#/components/schemas/User'
-            application/x-www-form-urlencoded:
-              schema:
-                $ref: '#/components/schemas/User'
+        '405':
+          description: Invalid input
+  /users/{id}:
+    get:
+      tags:
+        - user
+      summary: Encuentra un usuario según su ID
+      description: Devuelve un único usuario
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario a devolver
           required: true
-        responses:
-          '200':
-            description: Operación exitosa
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/User'
-              application/xml:
-                schema:
-                  $ref: '#/components/schemas/User'
-          '405':
-            description: Invalid input
-    /users/{id}:
-      get:
-        tags:
-          - user
-        summary: Encuentra un usuario según su ID
-        description: Devuelve un único usuario
-        operationId: getUserById
-        parameters:
-          - name: id
-            in: path
-            description: ID del usuario a devolver
-            required: true
-            schema:
-              type: integer
-              format: int64
-        responses:
-          '200':
-            description: Operación exitosa
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/User'
-              application/xml:
-                schema:
-                  $ref: '#/components/schemas/User'
-          '400':
-            description: Invalid ID supplied
-          '404':
-            description: user not found
-      put:
-        tags:
-          - user
-        summary: Actualiza un usuario con los datos del formulario
-        description: ''
-        operationId: updateUserWithForm
-        parameters:
-          - name: id
-            in: path
-            description: ID del usuario a actualizar
-            required: true
-            schema:
-              type: integer
-              format: int64
-        requestBody:
-          description: Crea un nuevo Usuario
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -137,30 +112,57 @@ tags:
             application/xml:
               schema:
                 $ref: '#/components/schemas/User'
-            application/x-www-form-urlencoded:
-              schema:
-                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: user not found
+    put:
+      tags:
+        - user
+      summary: Actualiza un usuario con los datos del formulario
+      description: ''
+      operationId: updateUserWithForm
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario a actualizar
           required: true
-        responses:
-          '405':
-            description: Invalid input
-      delete:
-        tags:
-          - user
-        summary: Borra un usuario
-        description: Borra un usuario
-        operationId: deleteUser
-        parameters:
-          - name: id
-            in: path
-            description: id del usuario a borrar
-            required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Crea un nuevo Usuario
+        content:
+          application/json:
             schema:
-              type: integer
-              format: int64
-        responses:
-          '400':
-            description: Invalid user value
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '405':
+          description: Invalid input
+    delete:
+      tags:
+        - user
+      summary: Borra un usuario
+      description: Borra un usuario
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: id del usuario a borrar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid user value
 
 beers:
   paths:
@@ -311,6 +313,7 @@ beers:
         responses:
           '400':
             description: Invalid beer value
+
 locals:
   paths:
     /locals:
