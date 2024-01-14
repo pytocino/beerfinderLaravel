@@ -7,7 +7,7 @@ servers:
     variables: {}
     description: Entorno React
 tags:
-  - name: userss
+  - name: users
     description: Operaciones con los usuarios
   - name: beers
     description: Operaciones con las beers
@@ -338,7 +338,7 @@ components:
         - created_at
         - updated_at
       xml:
-        name: userss
+        name: users
   Beer:
     type: object
     properties:
