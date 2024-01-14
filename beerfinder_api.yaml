@@ -38,6 +38,118 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse"
+    post:
+      tags:
+        - users
+      summary: Crear un usuario
+      description: Crear un usuario
+      operationId: users.store
+      requestBody:
+        description: Datos del usuario
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/usersStoreRequest"
+      responses:
+        "201":
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/usersStoreResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: Obtener un usuario
+      description: Obtener un usuario
+      operationId: users.show
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Usuario obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/usersShowResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    put:
+      tags:
+        - users
+      summary: Actualizar un usuario
+      description: Actualizar un usuario
+      operationId: users.update
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos del usuario
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/usersUpdateRequest"
+      responses:
+        "200":
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/usersUpdateResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    delete:
+      tags:
+        - users
+      summary: Eliminar un usuario
+      description: Eliminar un usuario
+      operationId: users.destroy
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Usuario eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/usersDestroyResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
   /beers:
     get:
       tags:
@@ -58,6 +170,118 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse"
+    post:
+      tags:
+        - beers
+      summary: Crear una beer
+      description: Crear una beer
+      operationId: beers.store
+      requestBody:
+        description: Datos de la beer
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/beersStoreRequest"
+      responses:
+        "201":
+          description: Beer creada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beersStoreResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /beers/{id}:
+    get:
+      tags:
+        - beers
+      summary: Obtener una beer
+      description: Obtener una beer
+      operationId: beers.show
+      parameters:
+        - name: id
+          in: path
+          description: ID de la beer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Beer obtenida correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beersShowResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    put:
+      tags:
+        - beers
+      summary: Actualizar una beer
+      description: Actualizar una beer
+      operationId: beers.update
+      parameters:
+        - name: id
+          in: path
+          description: ID de la beer
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos de la beer
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/beersUpdateRequest"
+      responses:
+        "200":
+          description: Beer actualizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beersUpdateResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    delete:
+      tags:
+        - beers
+      summary: Eliminar una beer
+      description: Eliminar una beer
+      operationId: beers.destroy
+      parameters:
+        - name: id
+          in: path
+          description: ID de la beer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Beer eliminada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beersDestroyResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"  
   /locals:
     get:
       tags:
@@ -78,6 +302,118 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse"
+    post:
+      tags:
+        - locals
+      summary: Crear un local
+      description: Crear un local
+      operationId: locals.store
+      requestBody:
+        description: Datos del local
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/localsStoreRequest"
+      responses:
+        "201":
+          description: Local creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/localsStoreResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /locals/{id}:
+    get:
+      tags:
+        - locals
+      summary: Obtener un local
+      description: Obtener un local
+      operationId: locals.show
+      parameters:
+        - name: id
+          in: path
+          description: ID del local
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Local obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/localsShowResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"  
+    put:
+      tags:
+        - locals
+      summary: Actualizar un local
+      description: Actualizar un local
+      operationId: locals.update
+      parameters:
+        - name: id
+          in: path
+          description: ID del local
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos del local
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/localsUpdateRequest"
+      responses:
+        "200":
+          description: Local actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/localsUpdateResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"  
+    delete:
+      tags:
+        - locals
+      summary: Eliminar un local
+      description: Eliminar un local
+      operationId: locals.destroy
+      parameters:
+        - name: id
+          in: path
+          description: ID del local
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Local eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/localsDestroyResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
   /beerlocals:
     get:
       tags:
@@ -92,6 +428,118 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/beerlocalsIndexResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    post:
+      tags:
+        - beerlocals
+      summary: Crear un beerlocal
+      description: Crear un beerlocal
+      operationId: beerlocals.store
+      requestBody:
+        description: Datos del beerlocal
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/beerlocalsStoreRequest"
+      responses:
+        "201":
+          description: Beerlocal creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beerlocalsStoreResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /beerlocals/{id}:
+    get:
+      tags:
+        - beerlocals
+      summary: Obtener un beerlocal
+      description: Obtener un beerlocal
+      operationId: beerlocals.show
+      parameters:
+        - name: id
+          in: path
+          description: ID del beerlocal
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Beerlocal obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beerlocalsShowResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"  
+    put:
+      tags:
+        - beerlocals
+      summary: Actualizar un beerlocal
+      description: Actualizar un beerlocal
+      operationId: beerlocals.update
+      parameters:
+        - name: id
+          in: path
+          description: ID del beerlocal
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos del beerlocal
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/beerlocalsUpdateRequest"
+      responses:
+        "200":
+          description: Beerlocal actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beerlocalsUpdateResponse"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"  
+    delete:
+      tags:
+        - beerlocals
+      summary: Eliminar un beerlocal
+      description: Eliminar un beerlocal
+      operationId: beerlocals.destroy
+      parameters:
+        - name: id
+          in: path
+          description: ID del beerlocal
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Beerlocal eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/beerlocalsDestroyResponse"
         "401":
           description: No autorizado
           content:
