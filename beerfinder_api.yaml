@@ -3,7 +3,7 @@ info:
   title: BEERFINDER - OpenAPI 3.0
   version: 1.0.11
 servers:
-  - url: localhost/api/records
+  - url: beerfinder.test/api/records
     variables: {}
     description: Entorno React
 tags:
