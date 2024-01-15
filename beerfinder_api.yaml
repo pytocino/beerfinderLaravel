@@ -1,7 +1,9 @@
-openapi: 3.1.0
+openapi: 3.0.1
 info:
   title: BEERFINDER - OpenAPI 3.1.0
   version: 1.0.11
+security:
+  - basic_auth: []
 servers:
   - url: http://beerfinder.test/api/records/
     variables: {}
@@ -26,18 +28,18 @@ paths:
       description: Obtener todos los usuarios
       operationId: users.index
       responses:
-        "200":
+        '200':
           description: Usuarios obtenidos correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/usersIndexResponse"
-        "401":
+                $ref: '#/components/schemas/User'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     post:
       tags:
         - users
@@ -50,20 +52,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/usersStoreRequest"
+              $ref: '#/components/schemas/User'
       responses:
-        "201":
+        '201':
           description: Usuario creado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/usersStoreResponse"
-        "401":
+                $ref: '#/components/schemas/User'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /users/{id}:
     get:
       tags:
@@ -79,18 +81,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Usuario obtenido correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/usersShowResponse"
-        "401":
+                $ref: '#/components/schemas/User'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     put:
       tags:
         - users
@@ -110,20 +112,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/usersUpdateRequest"
+              $ref: '#/components/schemas/User'
       responses:
-        "200":
+        '200':
           description: Usuario actualizado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/usersUpdateResponse"
-        "401":
+                $ref: '#/components/schemas/User'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     delete:
       tags:
         - users
@@ -138,18 +140,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Usuario eliminado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/usersDestroyResponse"
-        "401":
+                $ref: '#/components/schemas/User'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /beers:
     get:
       tags:
@@ -158,18 +160,18 @@ paths:
       description: Obtener todas las beers
       operationId: beers.index
       responses:
-        "200":
+        '200':
           description: Beers obtenidas correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beersIndexResponse"
-        "401":
+                $ref: '#/components/schemas/Beer'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     post:
       tags:
         - beers
@@ -182,20 +184,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/beersStoreRequest"
+              $ref: '#/components/schemas/Beer'
       responses:
-        "201":
+        '201':
           description: Beer creada correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beersStoreResponse"
-        "401":
+                $ref: '#/components/schemas/Beer'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /beers/{id}:
     get:
       tags:
@@ -211,18 +213,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Beer obtenida correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beersShowResponse"
-        "401":
+                $ref: '#/components/schemas/Beer'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     put:
       tags:
         - beers
@@ -242,20 +244,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/beersUpdateRequest"
+              $ref: '#/components/schemas/Beer'
       responses:
-        "200":
+        '200':
           description: Beer actualizada correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beersUpdateResponse"
-        "401":
+                $ref: '#/components/schemas/Beer'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     delete:
       tags:
         - beers
@@ -270,18 +272,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Beer eliminada correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beersDestroyResponse"
-        "401":
+                $ref: '#/components/schemas/Beer'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /locals:
     get:
       tags:
@@ -290,18 +292,18 @@ paths:
       description: Obtener todos los locals
       operationId: locals.index
       responses:
-        "200":
+        '200':
           description: Locals obtenidos correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/localsIndexResponse"
-        "401":
+                $ref: '#/components/schemas/Local'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     post:
       tags:
         - locals
@@ -314,20 +316,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/localsStoreRequest"
+              $ref: '#/components/schemas/Local'
       responses:
-        "201":
+        '201':
           description: Local creado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/localsStoreResponse"
-        "401":
+                $ref: '#/components/schemas/Local'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /locals/{id}:
     get:
       tags:
@@ -343,18 +345,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Local obtenido correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/localsShowResponse"
-        "401":
+                $ref: '#/components/schemas/Local'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     put:
       tags:
         - locals
@@ -374,20 +376,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/localsUpdateRequest"
+              $ref: '#/components/schemas/Local'
       responses:
-        "200":
+        '200':
           description: Local actualizado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/localsUpdateResponse"
-        "401":
+                $ref: '#/components/schemas/Local'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     delete:
       tags:
         - locals
@@ -402,18 +404,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Local eliminado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/localsDestroyResponse"
-        "401":
+                $ref: '#/components/schemas/Local'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /beerlocals:
     get:
       tags:
@@ -422,18 +424,18 @@ paths:
       description: Obtener todos los beerlocals
       operationId: beerlocals.index
       responses:
-        "200":
+        '200':
           description: Beerlocals obtenidos correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beerlocalsIndexResponse"
-        "401":
+                $ref: '#/components/schemas/Beerlocal'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     post:
       tags:
         - beerlocals
@@ -446,20 +448,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/beerlocalsStoreRequest"
+              $ref: '#/components/schemas/Beerlocal'
       responses:
-        "201":
+        '201':
           description: Beerlocal creado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beerlocalsStoreResponse"
-        "401":
+                $ref: '#/components/schemas/Beerlocal'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /beerlocals/{id}:
     get:
       tags:
@@ -475,18 +477,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Beerlocal obtenido correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beerlocalsShowResponse"
-        "401":
+                $ref: '#/components/schemas/Beerlocal'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     put:
       tags:
         - beerlocals
@@ -506,20 +508,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/beerlocalsUpdateRequest"
+              $ref: '#/components/schemas/Beerlocal'
       responses:
-        "200":
+        '200':
           description: Beerlocal actualizado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beerlocalsUpdateResponse"
-        "401":
+                $ref: '#/components/schemas/Beerlocal'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
     delete:
       tags:
         - beerlocals
@@ -534,18 +536,18 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Beerlocal eliminado correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/beerlocalsDestroyResponse"
-        "401":
+                $ref: '#/components/schemas/Beerlocal'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
   /visits:
     get:
       tags:
@@ -554,18 +556,18 @@ paths:
       description: Obtener todas las visits
       operationId: visits.index
       responses:
-        "200":
+        '200':
           description: Visits obtenidas correctamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/visitsIndexResponse"
-        "401":
+                $ref: '#/components/schemas/Visit'
+        '401':
           description: No autorizado
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
     User:
@@ -591,7 +593,7 @@ components:
         - created_at
         - updated_at
       xml:
-        name: userss
+        name: User
     Beer:
       type: object
       properties:
@@ -604,7 +606,7 @@ components:
         color:
           type: string
         graduation:
-          type: float
+          type: number
         taste:
           type: string
         type:
@@ -636,7 +638,7 @@ components:
         - created_at
         - updated_at
       xml:
-        name: Beers
+        name: Beer
     Local:
       type: object
       properties:
@@ -693,7 +695,7 @@ components:
         - created_at
         - updated_at
       xml:
-        name: Locals
+        name: Local
     Beerlocal:
       type: object
       properties:
@@ -726,49 +728,49 @@ components:
         - id
         - count
       xml:
-        name: Visits
-  ApiResponse:
-    type: object
-    properties:
-      code:
-        type: integer
-      type:
-        type: string
-      message:
-        type: string
-    required:
-      - code
-      - type
-      - message
-    xml:
-      name: ApiResponses
-    requestBodies:
-      User:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/users"
-      Beer:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Beer"
-      Local:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Local"
-      Beerlocal:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Beerlocal"
-      Visit:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Visit"
-    securitySchemes:
-      basic_auth:
-        type: http
-        scheme: basic
+        name: Visit
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        type:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - type
+        - message
+      xml:
+        name: ApiResponse
+  requestBodies:
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    Beer:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Beer'
+    Local:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Local'
+    Beerlocal:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Beerlocal'
+    Visit:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Visit'
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
