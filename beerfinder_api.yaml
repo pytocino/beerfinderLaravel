@@ -8,6 +8,9 @@ servers:
   - url: http://beerfinder.test/api/records/
     variables: {}
     description: Entorno React
+  - url: http://beerfinder.test/api/vi/
+    variables: {}
+    description: Entorno produccion
 tags:
   - name: users
     description: Operaciones con los usuarios
