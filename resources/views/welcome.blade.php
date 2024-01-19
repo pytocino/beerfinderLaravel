@@ -28,7 +28,7 @@
                             @endif
                             <h5 class="card-title">{{ $beer->name }}</h5>
                             <p class="card-text">{{ $beer->graduation }}%</p>
-                            <p class="card-text">{{ $beer->country }}</p>
+                            {{-- <p class="card-text">{{ $beer->country }}</p> --}}
                             <form class="d-flex justify-content-center" action="{{ route('locals') }}" method="GET">
                                 <input type="hidden" name="name" value="{{ $beer->name }}">
                                 <button type="submit" class="btn bg-beer fw-semibold">ENCUENTRALA</button>

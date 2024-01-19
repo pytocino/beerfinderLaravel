@@ -108,18 +108,8 @@ class DashboardController extends Controller
             'country' => $request->input('country'),
             'city' => $request->input('city'),
             'region' => $request->input('region'),
+            'image' => $request->file('image')->storeAs('images', $cerve->name . '.jpg', ['disk' => 'public']),
         ]);
-
-        if ($request->file('imagen')) {
-            $request->validate([
-                'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
-            ]);
-            // Procesa y guarda la imagen
-            $imagePath = $request->file('imagen')->store('images', ['disk' => 'public']);
-            $cerve->image = $imagePath;
-        }
-
-        $cerve->save();
 
         return redirect()->back()->with('success', 'Cerveza actualizada exitosamente');
     }

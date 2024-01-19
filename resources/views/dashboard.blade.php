@@ -355,7 +355,7 @@
 
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="image">Imagen</label>
-                                    <input type="file" class="form-control-file" id="imagen" name="imagen">
+                                    <input type="file" class="form-control-file" id="image" name="image">
                                 </div>
 
                                 <div class="form-group mb-2">
