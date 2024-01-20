@@ -3,6 +3,20 @@
 @include('partials.head')
 
 <body>
+    <div class="modal fade" id="ageVerificationModal" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered text-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-bg-warning">¿Eres mayor de edad?</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Para acceder a este sitio, necesitas ser mayor de edad.</p>
+                    <button type="button" class="btn btn-warning" id="yesBtn">Sí</button>
+                    <button type="button" class="btn btn-danger" id="noBtn" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @include('partials.header')
     <main class="container">
         <div class="row">
@@ -45,6 +59,24 @@
         </div>
     </main>
     @include('partials.footer')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            if (document.cookie.indexOf('modal_visto=1') === -1) {
+                let ageVerificationModal = new bootstrap.Modal(document.getElementById('ageVerificationModal'));
+                ageVerificationModal.show();
+
+                document.getElementById('yesBtn').addEventListener('click', function() {
+                    ageVerificationModal.hide();
+                    document.cookie = "modal_visto=1; max-age=" + 30 * 24 * 60 * 60 + "; path=/";
+                });
+
+                document.getElementById('noBtn').addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
