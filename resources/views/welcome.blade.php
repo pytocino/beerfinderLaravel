@@ -45,7 +45,7 @@
                             {{-- <p class="card-text">{{ $beer->country }}</p> --}}
                             <form class="d-flex justify-content-center" action="{{ route('locals') }}" method="GET">
                                 <input type="hidden" name="name" value="{{ $beer->name }}">
-                                <button type="submit" class="btn bg-beer fw-semibold">ENCUENTRALA</button>
+                                <button type="submit" class="btn bg-beer"><strong>ENCUENTRALA</strong> </button>
                             </form>
                         </div>
                     </div>
