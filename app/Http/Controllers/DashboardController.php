@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\EventsLog;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -24,7 +26,44 @@ class DashboardController extends Controller
             ->get();
 
         $locals = Local::with('beers')->where('user_id', $user->id)->get();
-        return view('dashboard', ['locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves, 'users' => $users]);
+        $eventsByHour = EventsLog::select(DB::raw('HOUR(event_time) as hour'), DB::raw('COUNT(*) as total'))
+            ->groupBy(DB::raw('HOUR(event_time)'))
+            ->orderBy(DB::raw('HOUR(event_time)'))
+            ->get();
+
+        // Obtener la distribución de eventos por URLs de referencia
+        $eventsByPreviousUrl = EventsLog::select('previous_url', DB::raw('COUNT(*) as total'))
+            ->groupBy('previous_url')
+            ->orderBy('total', 'desc')
+            ->limit(10) // Limitar a las 10 primeras rutas con más eventos
+            ->get();
+
+        // Transformar los datos para mostrar el dominio base y la siguiente ruta después del dominio
+        $eventsByPreviousUrl->transform(function ($item, $key) {
+            // Obtener el host de la URL
+            $host = parse_url($item->previous_url, PHP_URL_HOST);
+
+            // Si el host está vacío, retornar la URL completa
+            if (!$host) {
+                return (object) ['first_route' => $item->previous_url, 'total' => $item->total];
+            }
+
+            // Obtener la ruta después del dominio
+            $path = parse_url($item->previous_url, PHP_URL_PATH);
+            // Si la ruta está vacía, retornar solo el dominio base
+            if (!$path) {
+                return (object) ['first_route' => $host, 'total' => $item->total];
+            }
+
+            // Obtener la primera parte de la ruta después del dominio
+            $parts = explode('/', $path);
+            $firstRoute = $parts[1];
+
+            // Retornar el dominio base y la primera ruta después del dominio
+            return (object) ['first_route' => $host . '/' . $firstRoute, 'total' => $item->total];
+        });
+
+        return view('dashboard', ['eventsByPreviousUrl' => $eventsByPreviousUrl, 'eventsByHour' => $eventsByHour, 'locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves, 'users' => $users]);
     }
 
     public function agregarCerveza(Request $request)

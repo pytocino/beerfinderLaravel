@@ -12,6 +12,7 @@
             <input class="my-2" type="text" id="searchInput" placeholder="Buscar...">
         </div>
         <div class="container" id="admin">
+            <hr class="mb-2">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                     <table class="table table-striped table-dark table-bordered table-hover">
@@ -34,6 +35,23 @@
                     {{ $users->links() }}
                 </div>
             </div>
+            <hr class="mb-2">
+            <div class="row">
+                @if (@isset($eventsByHour))
+                    <div class="col-6">
+                        <canvas id="eventsByHourChart" width="300" height="300"></canvas>
+                    </div>
+                @endif
+
+                @if (@isset($eventsByPreviousUrl))
+                    <div class="col-6">
+                        <canvas id="eventsByPreviousUrlChart" width="300" height="300"></canvas>
+                    </div>
+                @endif
+            </div>
+
+
+            <hr class="mb-2">
             <div class="row" id="locales">
                 <h2 class="h2 text-center">Locales</h2>
                 @include('partials.createlocal')
@@ -558,4 +576,97 @@
             </div>
         </main>
     @endif
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    @if (isset($eventsByHour))
+        <script>
+            // Datos para el gráfico de distribución por horas
+            let eventsByHourData = {!! $eventsByHour !!};
+
+            // Preparar datos para Chart.js
+            let hours = eventsByHourData.map(data => data.hour);
+            let counts = eventsByHourData.map(data => data.total);
+
+            // Configuración del gráfico de distribución por horas
+            let ctx = document.getElementById('eventsByHourChart').getContext('2d');
+            let chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: hours,
+                    datasets: [{
+                        label: 'Visitas por horas',
+                        data: counts,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Visitas'
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Hora del día'
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+    @endif
+
+    @if (@isset($eventsByPreviousUrl))
+        <script>
+            // Datos para el gráfico de distribución por URLs de referencia
+            let eventsByPreviousUrlData = {!! $eventsByPreviousUrl !!};
+
+            // Preparar datos para Chart.js
+            let urls = eventsByPreviousUrlData.map(data => data.first_route);
+            let counts2 = eventsByPreviousUrlData.map(data => data.total);
+
+            // Configuración del gráfico de distribución por URLs de referencia
+            let ctx2 = document.getElementById('eventsByPreviousUrlChart').getContext('2d');
+            let chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: urls,
+                    datasets: [{
+                        label: 'URL previa',
+                        data: counts2,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Visitas'
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'URL previa'
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+    @endif
+
 </x-app-layout>
