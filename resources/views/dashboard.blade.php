@@ -35,23 +35,23 @@
                     {{ $users->links() }}
                 </div>
             </div>
-            <hr class="mb-2">
+            <hr class="my-2">
             <div class="row">
                 @if (@isset($eventsByHour))
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <canvas id="eventsByHourChart" width="300" height="300"></canvas>
                     </div>
                 @endif
 
                 @if (@isset($eventsByPreviousUrl))
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <canvas id="eventsByPreviousUrlChart" width="300" height="300"></canvas>
                     </div>
                 @endif
             </div>
 
 
-            <hr class="mb-2">
+            <hr class="my-2">
             <div class="row" id="locales">
                 <h2 class="h2 text-center">Locales</h2>
                 @include('partials.createlocal')
@@ -639,7 +639,7 @@
                 data: {
                     labels: urls,
                     datasets: [{
-                        label: 'URL previa',
+                        label: 'Visitas por URL',
                         data: counts2,
                         backgroundColor: 'rgba(255, 99, 132, 0.5)',
                         borderColor: 'rgba(255, 99, 132, 1)',

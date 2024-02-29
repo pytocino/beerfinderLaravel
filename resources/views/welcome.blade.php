@@ -23,6 +23,12 @@
             <div class="col-12">
                 @include('partials.finder')
             </div>
+            <div class="text-left p-1">
+                <p class="text-muted">Gracias a BEERFINDER al menos {{ formatNumber($visitCount) }} personas han
+                    encontrado
+                    la cerveza que estaban buscando ¡Salud! 🍻
+                </p>
+            </div>
         </div>
         {{-- SUGERENCIAS DE CERVEZAS --}}
         <div class="row">
@@ -52,11 +58,7 @@
                 </div>
             @endforeach
         </div>
-        <div class="text-left p-1">
-            <p class="text-muted">Gracias a BEERFINDER al menos {{ formatNumber($visitCount) }} personas han encontrado
-                la cerveza que estaban buscando ¡Salud! 🍻
-            </p>
-        </div>
+
     </main>
     @include('partials.footer')
     <script>

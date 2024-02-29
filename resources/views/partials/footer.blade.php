@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="text-center p-3 border-top border-white">
-        <h3>© BEERFINDER - 2023</h3>
+        <h3>© BEERFINDER - 2024</h3>
         <h3>Todos los derechos reservados.</h3>
     </div>
 
