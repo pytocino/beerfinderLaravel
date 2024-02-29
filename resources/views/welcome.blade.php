@@ -24,9 +24,14 @@
                 @include('partials.finder')
             </div>
             <div class="text-left p-1">
-                <p class="text-muted">Gracias a BEERFINDER al menos {{ formatNumber($visitCount) }} personas han
-                    encontrado
-                    la cerveza que estaban buscando ¡Salud! 🍻
+
+
+                <p class="text-muted">Gracias a BEERFINDER al menos @if ($visitCount > 9999)
+                        {{ formatNumber($visitCount) }}
+                    @else
+                        {{ $visitCount }}
+                    @endif
+                    personas han encontrado la cerveza que estaban buscando ¡Salud! 🍻
                 </p>
             </div>
         </div>
