@@ -687,7 +687,7 @@
 
             // Obtener ubicación de las IPs y preparar datos para el gráfico
             Promise.all(eventsByIPData.map(data =>
-                fetch(`http://ip-api.com/json/${data.ip_address}`)
+                fetch(`https://ipapi.co/${data.ip_address}/json`)
                 .then(response => response.json())
                 .then(locationData => {
                     ips.push(locationData.city);
