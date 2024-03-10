@@ -690,7 +690,7 @@
                 fetch(`http://ip-api.com/json/${data.ip_address}`)
                 .then(response => response.json())
                 .then(locationData => {
-                    ips.push(`${locationData.country}, ${locationData.city}`);
+                    ips.push(locationData.city);
                     counts3.push(data.total);
                     colors.push(getRandomColor()); // Genera un color aleatorio para cada ubicación
                 })
