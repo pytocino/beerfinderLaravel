@@ -48,6 +48,12 @@
                         <canvas id="eventsByPreviousUrlChart" width="300" height="300"></canvas>
                     </div>
                 @endif
+
+                @if (@isset($eventsByIP))
+                    <div class="col-12 col-sm-6">
+                        <canvas id="eventsByIPChart" width="300" height="300"></canvas>
+                    </div>
+                @endif
             </div>
 
 
@@ -667,8 +673,53 @@
                 }
             });
         </script>
-    @else
-        console.log('No hay datos para el gráfico de distribución por URLs de referencia');
     @endif
 
+    @if (@isset($eventsByIP))
+        <script>
+            // Datos para el gráfico de distribución por IPs
+            let eventsByIPData = {!! $eventsByIP !!};
+
+            // Preparar datos para Chart.js
+            let ips = [];
+            let counts3 = [];
+            let colors = [];
+
+            // Obtener ubicación de las IPs y preparar datos para el gráfico
+            Promise.all(eventsByIPData.map(data =>
+                fetch(`http://ip-api.com/json/${data.ip_address}`)
+                .then(response => response.json())
+                .then(locationData => {
+                    ips.push(`${locationData.country}, ${locationData.city}`);
+                    counts3.push(data.total);
+                    colors.push(getRandomColor()); // Genera un color aleatorio para cada ubicación
+                })
+                .catch(error => console.error(`Error fetching location for IP ${data.ip_address}:`, error))
+            )).then(() => {
+                // Configuración del gráfico de distribución por IPs
+                let ctx = document.getElementById('eventsByIPChart').getContext('2d');
+                let myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ips, // Usamos las ubicaciones como etiquetas
+                        datasets: [{
+                            label: 'Events by IP Location',
+                            data: counts3, // Usamos los conteos como datos
+                            backgroundColor: colors, // Usamos colores generados aleatoriamente
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        // Aquí puedes añadir más opciones personalizadas para el gráfico
+                    }
+                });
+            });
+
+            // Función para generar un color aleatorio
+            function getRandomColor() {
+                return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)`;
+            }
+        </script>
+    @endif
 </x-app-layout>

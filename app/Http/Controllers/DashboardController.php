@@ -63,8 +63,13 @@ class DashboardController extends Controller
             return (object) ['first_route' => $host . '/' . $firstRoute, 'total' => $item->total];
         }); */
 
+        $eventsByIP = EventsLog::select('ip_address', DB::raw('COUNT(*) as total'))
+            ->groupBy('ip_address')
+            ->orderBy('total', 'desc')
+            ->get();
 
-        return view('dashboard', ['eventsByPreviousUrl' => $eventsByPreviousUrl, 'eventsByHour' => $eventsByHour, 'locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves, 'users' => $users]);
+
+        return view('dashboard', ['eventsByIP' => $eventsByIP, 'eventsByPreviousUrl' => $eventsByPreviousUrl, 'eventsByHour' => $eventsByHour, 'locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves, 'users' => $users]);
     }
 
     public function agregarCerveza(Request $request)
