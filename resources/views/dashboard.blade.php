@@ -629,7 +629,7 @@
             let eventsByPreviousUrlData = {!! $eventsByPreviousUrl !!};
 
             // Preparar datos para Chart.js
-            let urls = eventsByPreviousUrlData.map(data => data.first_route);
+            let urls = eventsByPreviousUrlData.map(data => data.previous_url);
             let counts2 = eventsByPreviousUrlData.map(data => data.total);
 
             // Configuración del gráfico de distribución por URLs de referencia
@@ -667,6 +667,8 @@
                 }
             });
         </script>
+    @else
+        console.log('No hay datos para el gráfico de distribución por URLs de referencia');
     @endif
 
 </x-app-layout>

@@ -28,6 +28,7 @@ class BeerController extends Controller
         // Obtener la URL de la página anterior
         $previousUrl = url()->previous();
         $horaActual = Carbon::now()->addHour();
+        /* $fullUrl = request()->fullUrl(); */
 
         // Registrar el evento en el log de eventos
         $eventLogData = [

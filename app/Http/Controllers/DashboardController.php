@@ -38,7 +38,7 @@ class DashboardController extends Controller
             ->limit(10) // Limitar a las 10 primeras rutas con más eventos
             ->get();
 
-        // Transformar los datos para mostrar el dominio base y la siguiente ruta después del dominio
+        /* // Transformar los datos para mostrar el dominio base y la siguiente ruta después del dominio
         $eventsByPreviousUrl->transform(function ($item, $key) {
             // Obtener el host de la URL
             $host = parse_url($item->previous_url, PHP_URL_HOST);
@@ -61,7 +61,8 @@ class DashboardController extends Controller
 
             // Retornar el dominio base y la primera ruta después del dominio
             return (object) ['first_route' => $host . '/' . $firstRoute, 'total' => $item->total];
-        });
+        }); */
+
 
         return view('dashboard', ['eventsByPreviousUrl' => $eventsByPreviousUrl, 'eventsByHour' => $eventsByHour, 'locals' => $locals, 'beers' => $beers, 'user' => $user, 'locales' => $locales, 'cerves' => $cerves, 'users' => $users]);
     }
