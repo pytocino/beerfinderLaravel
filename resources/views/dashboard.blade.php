@@ -734,30 +734,33 @@
             // Datos para el gráfico de distribución por IPs
             let eventsByIPData2 = {!! $eventsByIP !!};
 
-            // Preparar datos para Chart.js
-            let ips2 = [];
-            let counts4 = [];
-            let colors2 = [];
+            // Objeto para mantener el recuento de eventos por país
+            let eventsByCountry = {};
 
             // Obtener ubicación de las IPs y preparar datos para el gráfico
             Promise.all(eventsByIPData.map(data =>
                 fetch(`https://ipapi.co/${data.ip_address}/json`)
                 .then(response => response.json())
                 .then(locationData => {
-                    ips2.push(locationData.country_name);
-                    counts4.push(data.total);
-                    colors2.push(getRandomColor()); // Genera un color aleatorio para cada ubicación
+                    let country = locationData.country_name;
+                    // Si el país ya está en el objeto, incrementa el contador, de lo contrario, inicializa el contador en 1
+                    eventsByCountry[country] = (eventsByCountry[country] || 0) + 1;
                 })
                 .catch(error => console.error(`Error fetching location for IP ${data.ip_address}:`, error))
             )).then(() => {
+                // Preparar datos para el gráfico
+                let countries = Object.keys(eventsByCountry);
+                let counts4 = Object.values(eventsByCountry);
+                let colors2 = countries.map(() => getRandomColor()); // Genera un color aleatorio para cada país
+
                 // Configuración del gráfico de distribución por IPs
                 let ctx = document.getElementById('eventsByIPChart2').getContext('2d');
                 let myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ips2, // Usamos las ubicaciones como etiquetas
+                        labels: countries, // Usamos los países como etiquetas
                         datasets: [{
-                            label: 'Visitas por Pais',
+                            label: 'Visitas por País',
                             data: counts4, // Usamos los conteos como datos
                             backgroundColor: colors2, // Usamos colores generados aleatoriamente
                             borderColor: 'rgba(255, 255, 255, 0.2)',
