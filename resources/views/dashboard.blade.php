@@ -742,7 +742,7 @@
                 fetch(`https://ipapi.co/${data.ip_address}/json`)
                 .then(response => response.json())
                 .then(locationData => {
-                    let country = locationData.country_name;
+                    let country = locationData.country;
                     // Si el país ya está en el objeto, incrementa el contador, de lo contrario, inicializa el contador en 1
                     eventsByCountry[country] = (eventsByCountry[country] || 0) + 1;
                 })
