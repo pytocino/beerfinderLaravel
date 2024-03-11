@@ -54,6 +54,12 @@
                         <canvas id="eventsByIPChart" width="300" height="300"></canvas>
                     </div>
                 @endif
+
+                @if (@isset($eventsByIP))
+                    <div class="col-12 col-sm-6">
+                        <canvas id="eventsByIPChart2" width="300" height="300"></canvas>
+                    </div>
+                @endif
             </div>
 
 
@@ -703,9 +709,57 @@
                     data: {
                         labels: ips, // Usamos las ubicaciones como etiquetas
                         datasets: [{
-                            label: 'Events by IP Location',
+                            label: 'Visitas por Ciudad y Pais',
                             data: counts3, // Usamos los conteos como datos
                             backgroundColor: colors, // Usamos colores generados aleatoriamente
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        // Aquí puedes añadir más opciones personalizadas para el gráfico
+                    }
+                });
+            });
+
+            // Función para generar un color aleatorio
+            function getRandomColor() {
+                return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)`;
+            }
+        </script>
+    @endif
+
+    @if (@isset($eventsByIP))
+        <script>
+            // Datos para el gráfico de distribución por IPs
+            let eventsByIPData2 = {!! $eventsByIP !!};
+
+            // Preparar datos para Chart.js
+            let ips2 = [];
+            let counts4 = [];
+            let colors2 = [];
+
+            // Obtener ubicación de las IPs y preparar datos para el gráfico
+            Promise.all(eventsByIPData.map(data =>
+                fetch(`https://ipapi.co/${data.ip_address}/json`)
+                .then(response => response.json())
+                .then(locationData => {
+                    ips2.push(locationData.country_name);
+                    counts4.push(data.total);
+                    colors2.push(getRandomColor()); // Genera un color aleatorio para cada ubicación
+                })
+                .catch(error => console.error(`Error fetching location for IP ${data.ip_address}:`, error))
+            )).then(() => {
+                // Configuración del gráfico de distribución por IPs
+                let ctx = document.getElementById('eventsByIPChart2').getContext('2d');
+                let myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ips2, // Usamos las ubicaciones como etiquetas
+                        datasets: [{
+                            label: 'Visitas por Pais',
+                            data: counts4, // Usamos los conteos como datos
+                            backgroundColor: colors2, // Usamos colores generados aleatoriamente
                             borderColor: 'rgba(255, 255, 255, 0.2)',
                             borderWidth: 1
                         }]
