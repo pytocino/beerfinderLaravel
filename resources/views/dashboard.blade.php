@@ -732,7 +732,7 @@
     @if (@isset($eventsByIP))
         <script>
             // Datos para el gráfico de distribución por IPs
-            let eventsByIPData2 = {!! $eventsByIP !!};
+            let eventsByIPData = {!! $eventsByIP !!};
 
             // Objeto para mantener el recuento de eventos por país
             let eventsByCountry = {};
