@@ -18,5 +18,6 @@
     <link rel="stylesheet" href="leaflet/leaflet.css">
     <script src="leaflet/leaflet.js"></script>
     <script src="assets/script.js"></script>
-    <script></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6950924566762663"
+        crossorigin="anonymous"></script>
 </head>
