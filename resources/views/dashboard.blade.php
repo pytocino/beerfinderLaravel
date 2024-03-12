@@ -49,11 +49,11 @@
                     </div>
                 @endif
 
-                @if (@isset($eventsByIP))
+                {{-- @if (@isset($eventsByIP))
                     <div class="col-12 col-sm-6">
                         <canvas id="eventsByIPChart" width="300" height="300"></canvas>
                     </div>
-                @endif
+                @endif --}}
 
                 @if (@isset($eventsByIP))
                     <div class="col-12 col-sm-6">
@@ -681,7 +681,7 @@
         </script>
     @endif
 
-    @if (@isset($eventsByIP))
+    {{-- @if (@isset($eventsByIP))
         <script>
             // Datos para el gráfico de distribución por IPs
             let eventsByIPData = {!! $eventsByIP !!};
@@ -727,7 +727,7 @@
                 return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)`;
             }
         </script>
-    @endif
+    @endif --}}
 
     @if (@isset($eventsByIP))
         <script>
