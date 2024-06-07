@@ -71,29 +71,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
-    document.getElementById('searchInput').addEventListener('input', function() {
-    let searchValue = this.value.toLowerCase();
-    let allLocales = document.querySelectorAll('#admin #locales .col-12.col-md-6.col-lg-4.col-xl-3');
-    let allCervezas = document.querySelectorAll('#admin #cervezas .col-12.col-md-6.col-lg-4.col-xl-3');
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            let searchValue = this.value.toLowerCase();
+            let allLocales = document.querySelectorAll('#admin #locales .col-12.col-md-6.col-lg-4.col-xl-3');
+            let allCervezas = document.querySelectorAll('#admin #cervezas .col-12.col-md-6.col-lg-4.col-xl-3');
 
-    allLocales.forEach(function(item) {
-    let itemName = item.querySelector('.h3 span').textContent.toLowerCase();
-    if (itemName.includes(searchValue)) {
-    item.style.display = 'block';
-    } else {
-    item.style.display = 'none';
-    }
-    });
+            allLocales.forEach(function(item) {
+                let itemName = item.querySelector('.h3 span').textContent.toLowerCase();
+                if (itemName.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
 
-    allCervezas.forEach(function(item) {
-    let itemName = item.querySelector('.h3 span').textContent.toLowerCase();
-    if (itemName.includes(searchValue)) {
-    item.style.display = 'block';
-    } else {
-    item.style.display = 'none';
-    }
-    });
-    });
+            allCervezas.forEach(function(item) {
+                let itemName = item.querySelector('.h3 span').textContent.toLowerCase();
+                if (itemName.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
     </script>
 
 
