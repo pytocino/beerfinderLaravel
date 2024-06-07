@@ -14,7 +14,7 @@
         <div class="container" id="admin">
             <hr class="mb-2">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-12">
                     <table class="table table-striped table-dark table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr>
